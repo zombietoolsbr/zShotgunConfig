@@ -62,3 +62,11 @@ frameworks:
       version: v0.2.8
       type: app_store
       name: tk-framework-widget
+
+# unrealqt - PySide build for Unreal (Windows-only)
+  tk-framework-unrealqt_v1.x.x:
+    location:
+      type: git_branch
+      path: https://github.com/shotgunsoftware/tk-framework-unrealqt.git
+      branch: master
+      version: 58c2f7b
