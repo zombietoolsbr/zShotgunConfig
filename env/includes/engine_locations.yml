@@ -13,6 +13,12 @@
 
 ################################################################################
 
+# demo
+engines.tk-multi-demo.location:
+  type: app_store
+  name: tk-multi-demo
+  version: v1.2.0
+
 # 3dsMax
 engines.tk-3dsmaxplus.location:
   type: app_store
