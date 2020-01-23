@@ -297,7 +297,7 @@ paths:
         definition: '@users_shot_root_maya/workspace'
     # define the location of a publish area
     shot_publish_area_maya:
-        definition: '@shot_root_maya'
+        definition: '@shot_root_maya/workspace'
     # The location of WIP files
     maya_shot_work:
         definition: '@users_shot_root_maya/{name}.v{version}.{maya_extension}'
@@ -504,7 +504,7 @@ paths:
         definition: '@users_asset_root_maya/workspace'
     # define the location of a publish area
     asset_publish_area_maya:
-        definition: '@asset_root_maya'
+        definition: '@asset_root_maya/workspace'
     # The location of WIP files
     maya_asset_work:
         definition: '@users_asset_root_maya/{name}.v{version}.{maya_extension}'
