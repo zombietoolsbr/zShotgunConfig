@@ -515,7 +515,6 @@ paths:
     maya_asset_publish:
         definition: '@asset_root_maya/{name}.v{version}.{maya_extension}'
 
-
     #
     # Houdini
     #
