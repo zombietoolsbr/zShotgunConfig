@@ -548,7 +548,7 @@ paths:
 
     # The folder where the textures are exported for a project
     substancepainter_asset_textures_path_export:
-        definition: '@asset_publish_area_substancepainter/export'
+        definition: '@users_asset_root_maya/substancepainter/export'
         root_name: 'projectZombie_2020'
 
     # The location of published substance painter files
