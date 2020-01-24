@@ -508,19 +508,19 @@ paths:
 
     # define the location of a work area
     asset_work_area_maya:
-        definition: '@users_asset_root_maya/workspace'
+        definition: '@users_asset_root_maya/maya/workspace'
     # define the location of a publish area
     asset_publish_area_maya:
-        definition: '@asset_root_maya/workspace'
+        definition: '@asset_root_maya/maya/workspace'
     # The location of WIP files
     maya_asset_work:
-        definition: '@users_asset_root_maya/{name}.v{version}.{maya_extension}'
+        definition: '@users_asset_root_maya/maya/{name}.v{version}.{maya_extension}'
     # The location of backups of WIP files
     maya_asset_snapshot:
-        definition: '@users_asset_root_maya/snapshots/{name}.v{version}.{timestamp}.{maya_extension}'
+        definition: '@users_asset_root_maya/maya/snapshots/{name}.v{version}.{timestamp}.{maya_extension}'
     # The location of published maya files
     maya_asset_publish:
-        definition: '@asset_root_maya/{name}.v{version}.{maya_extension}'
+        definition: '@asset_root_maya/maya/{name}.v{version}.{maya_extension}'
 
     #
     # Substance Painter
@@ -553,7 +553,7 @@ paths:
 
     # The location of published substance painter files
     substancepainter_asset_publish:
-        definition: '@asset_publish_area_substancepainter/{name}.v{version}.spp'
+        definition: '@asset_root_maya/substancepainter/{name}.v{version}.spp'
         root_name: 'projectZombie_2020'
 
     # a texture folder publish
