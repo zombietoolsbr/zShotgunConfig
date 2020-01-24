@@ -198,7 +198,7 @@ paths:
     users_asset_root_maya: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
     asset_publish_area_substancepainter: 02_prod/sourceimages/{sg_asset_type}/{Asset}
-    
+    asset_root_substancepainter: 02_prod/sourceimages/{sg_asset_type}/{Asset}/{Step}
     
     ##########################################################################################
     # Project level paths
@@ -533,7 +533,7 @@ paths:
         root_name: 'projectZombie_2020'
     # define the location of a publish area
     asset_publish_area_substancepainter:
-        definition: '@asset_publish_area_substancepainter/substancepainter'
+        definition: '@asset_root_substancepainter/substancepainter'
         root_name: 'projectZombie_2020'
 
     # The location of WIP files
