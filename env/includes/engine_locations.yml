@@ -119,4 +119,4 @@ engines.tk-substancepainter.location:
   type: git
   branch: master
   path: https://github.com/zombietoolsbr/tk-substancepainter.git
-  version: v1.1.1
+  version: v1.2.1
