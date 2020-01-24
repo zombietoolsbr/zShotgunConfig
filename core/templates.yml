@@ -197,8 +197,8 @@ paths:
     users_shot_root_maya: 02_prod/users/{Sequence}/{Shot}/{Step}
     users_asset_root_maya: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
-    asset_publish_area_substancepainter: 02_prod/substancepainter/{sg_asset_type}/{Asset}
-    texture_publish_area_substancepainter: 02_prod/sourceimages/{sg_asset_type}/{Asset}
+    asset_publish_area_substancepainter: 02_prod/sourceimages/{sg_asset_type}/{Asset}
+    
     
     ##########################################################################################
     # Project level paths
@@ -548,7 +548,7 @@ paths:
 
     # The folder where the textures are exported for a project
     substancepainter_asset_textures_path_export:
-        definition: '@users_asset_root_maya/subtancepainter/export'
+        definition: '@asset_publish_area_substancepainter/textures/'
         root_name: 'projectZombie_2020'
 
     # The location of published substance painter files
@@ -563,7 +563,7 @@ paths:
 
     # a texture folder publish
     substancepainter_asset_texture_path_publish:
-        definition: '@texture_publish_area_substancepainter/{Asset}_{texture_name}_v{version}.{texture_extension}'
+        definition: '@asset_publish_area_substancepainter/textures/{Asset}_textures_v{version}/{Asset}_{texture_name}_v{version}.{texture_extension}'
         root_name: 'projectZombie_2020'
 
     #
