@@ -559,12 +559,12 @@ paths:
      # a texture folder publish
     substancepainter_asset_textures_path_publish:
         definition: '@asset_publish_area_substancepainter/textures/{Asset}_textures_v{version}'
-        root_name: 'primary'
+        root_name: 'projectZombie_2020'
 
     # a texture folder publish
     substancepainter_asset_texture_path_publish:
         definition: '@asset_publish_area_substancepainter/textures/{Asset}_{texture_name}_v{version}.{texture_extension}'
-        root_name: 'primary'
+        root_name: 'projectZombie_2020'
 
     #
     # Houdini
