@@ -13,6 +13,12 @@
 
 ################################################################################
 
+# demo
+engines.tk-multi-demo.location:
+  type: app_store
+  name: tk-multi-demo
+  version: v1.2.0
+
 # 3dsMax
 engines.tk-3dsmaxplus.location:
   type: app_store
@@ -107,3 +113,10 @@ engines.tk-vred.location:
   type: app_store
   name: tk-vred
   version: v2.0.2
+
+# Substance Painter
+engines.tk-substancepainter.location:
+  type: git
+  branch: master
+  path: https://github.com/zombietoolsbr/tk-substancepainter.git
+  version: v1.1.1
