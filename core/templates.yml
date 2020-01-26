@@ -551,7 +551,7 @@ paths:
 
     # The location of published substance painter files
     substancepainter_asset_publish:
-        definition: '@asset_work_area_substancepainter/{name}.v{version}.spp'
+        definition: '@asset_publish_area_substancepainter/{name}.v{version}.spp'
         root_name: 'projectZombie_2020'
 
      # a texture folder publish
