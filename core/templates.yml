@@ -198,8 +198,7 @@ paths:
     users_asset_root: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
     substance_file_publish: 02_prod/sourceimages/{sg_asset_type}/{Asset}
-    asset_substance_root: 02_prod/assets/{sg_asset_type}/{Asset}
-    users_asset_substance_root: 02_prod/users/{sg_asset_type}/{Asset}
+
     
     ##########################################################################################
     # Project level paths
@@ -530,11 +529,11 @@ paths:
     
     # define the location of a work area
     asset_work_area_substancepainter:
-        definition: '@users_asset_substance_root/LookDev/substancepainter'
+        definition: '@users_asset_root/substancepainter'
         
     # define the location of a publish area
     asset_publish_area_substancepainter:
-        definition: '@asset_substance_root/LookDev/substancepainter'
+        definition: '@asset_root/substancepainter'
         
     # The location of WIP files
     substancepainter_asset_work:
