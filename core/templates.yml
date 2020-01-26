@@ -197,7 +197,6 @@ paths:
     users_shot_root: 02_prod/users/{Sequence}/{Shot}/{Step}
     users_asset_root: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
-    asset_publish_area_substancepainter: 02_prod
     asset_publish_files_substancepainter: 02_prod/sourceimages/{sg_asset_type}/{Asset}
     
     ##########################################################################################
@@ -533,7 +532,7 @@ paths:
         root_name: 'projectZombie_2020'
     # define the location of a publish area
     asset_publish_area_substancepainter:
-        definition: '@asset_publish_area_substancepainter'
+        definition: '@asset_publish_files_substancepainter'
         root_name: 'projectZombie_2020'
 
     # The location of WIP files
@@ -558,12 +557,12 @@ paths:
 
      # a texture folder publish
     substancepainter_asset_textures_path_publish:
-        definition: '@asset_publish_files_substancepainter/sourceimages/{sg_asset_type}/{Asset}/textures/{Asset}_textures_v{version}'
+        definition: '@asset_publish_files_substancepainter/textures/{Asset}_textures_v{version}'
         root_name: 'projectZombie_2020'
 
     # a texture folder publish
     substancepainter_asset_texture_path_publish:
-        definition: '@asset_publish_files_substancepainter/sourceimages/{sg_asset_type}/{Asset}/textures/{Asset}_{texture_name}_v{version}.{texture_extension}'
+        definition: '@asset_publish_files_substancepainter/textures/{Asset}_{texture_name}_v{version}.{texture_extension}'
         root_name: 'projectZombie_2020'
 
     #
