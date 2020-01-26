@@ -191,14 +191,13 @@ paths:
     #
     # These don't require the standard formatting (with definition and root_name) because they
     # will be set within each template that uses the alias.
-    shot_root_maya: 02_prod/scenes/{Sequence}/{Shot}/{Step}
-    asset_root_maya: 02_prod/assets/{sg_asset_type}/{Asset}/{Step}
+    shot_root: 02_prod/scenes/{Sequence}/{Shot}/{Step}
+    asset_root: 02_prod/assets/{sg_asset_type}/{Asset}/{Step}
     sequence_root_maya: 02_prod/scenes/{Sequence}
-    users_shot_root_maya: 02_prod/users/{Sequence}/{Shot}/{Step}
-    users_asset_root_maya: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
+    users_shot_root: 02_prod/users/{Sequence}/{Shot}/{Step}
+    users_asset_root: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
-    asset_publish_area_substancepainter: 02_prod/sourceimages/{sg_asset_type}/{Asset}
-    asset_root_substancepainter: 02_prod/sourceimages/{sg_asset_type}/{Asset}/{Step}
+    asset_publish_area_substancepainter: 02_prod
     
     ##########################################################################################
     # Project level paths
@@ -301,19 +300,19 @@ paths:
 
     # define the location of a work area
     shot_work_area_maya:
-        definition: '@users_shot_root_maya/workspace'
+        definition: '@users_shot_root/workspace'
     # define the location of a publish area
     shot_publish_area_maya:
-        definition: '@shot_root_maya/workspace'
+        definition: '@shot_root/workspace'
     # The location of WIP files
     maya_shot_work:
-        definition: '@users_shot_root_maya/{name}.v{version}.{maya_extension}'
+        definition: '@users_shot_root/{name}.v{version}.{maya_extension}'
     # The location of backups of WIP files
     maya_shot_snapshot:
-        definition: '@users_shot_root_maya/snapshots/{name}.v{version}.{timestamp}.{maya_extension}'
+        definition: '@users_shot_root/snapshots/{name}.v{version}.{timestamp}.{maya_extension}'
     # The location of published maya files
     maya_shot_publish:
-        definition: '@shot_root_maya/{name}.v{version}.{maya_extension}'
+        definition: '@shot_root/{name}.v{version}.{maya_extension}'
 
 
     #
@@ -508,19 +507,19 @@ paths:
 
     # define the location of a work area
     asset_work_area_maya:
-        definition: '@users_asset_root_maya/maya/workspace'
+        definition: '@users_asset_root/maya/workspace'
     # define the location of a publish area
     asset_publish_area_maya:
-        definition: '@asset_root_maya/maya/workspace'
+        definition: '@asset_root/maya/workspace'
     # The location of WIP files
     maya_asset_work:
-        definition: '@users_asset_root_maya/maya/{name}.v{version}.{maya_extension}'
+        definition: '@users_asset_root/maya/{name}.v{version}.{maya_extension}'
     # The location of backups of WIP files
     maya_asset_snapshot:
-        definition: '@users_asset_root_maya/maya/snapshots/{name}.v{version}.{timestamp}.{maya_extension}'
+        definition: '@users_asset_root/maya/snapshots/{name}.v{version}.{timestamp}.{maya_extension}'
     # The location of published maya files
     maya_asset_publish:
-        definition: '@asset_root_maya/maya/{name}.v{version}.{maya_extension}'
+        definition: '@asset_root/maya/{name}.v{version}.{maya_extension}'
 
     #
     # Substance Painter
@@ -529,41 +528,41 @@ paths:
     
     # define the location of a work area
     asset_work_area_substancepainter:
-        definition: '@users_asset_root_maya/substancepainter'
+        definition: '@users_asset_root/substancepainter'
         root_name: 'projectZombie_2020'
     # define the location of a publish area
     asset_publish_area_substancepainter:
-        definition: '@asset_root_substancepainter'
+        definition: '@asset_publish_area_substancepainter'
         root_name: 'projectZombie_2020'
 
     # The location of WIP files
     substancepainter_asset_work:
-        definition: '@users_asset_root_maya/substancepainter/{name}.v{version}.spp'
+        definition: '@users_asset_root/substancepainter/{name}.v{version}.spp'
         root_name: 'projectZombie_2020'
 
     # The location of backups of WIP files
     substancepainter_asset_snapshot:
-        definition: '@users_asset_root_maya/substancepainter/snapshots/{name}.v{version}.{timestamp}.spp'
+        definition: '@users_asset_root/substancepainter/snapshots/{name}.v{version}.{timestamp}.spp'
         root_name: 'projectZombie_2020'
 
     # The folder where the textures are exported for a project
     substancepainter_asset_textures_path_export:
-        definition: '@asset_publish_area_substancepainter/textures'
+        definition: '@users_asset_root/substancepainter/export'
         root_name: 'projectZombie_2020'
 
     # The location of published substance painter files
     substancepainter_asset_publish:
-        definition: '@asset_root_maya/substancepainter/{name}.v{version}.spp'
+        definition: '@asset_publish_area_substancepainter/assets/{sg_asset_type}/{Asset}/substancepainter/{name}.v{version}.spp'
         root_name: 'projectZombie_2020'
 
      # a texture folder publish
     substancepainter_asset_textures_path_publish:
-        definition: '@asset_publish_area_substancepainter/textures/{Asset}_textures_v{version}'
+        definition: '@asset_publish_area_substancepainter/sourceimages/{sg_asset_type}/{Asset}/textures/{Asset}_textures_v{version}'
         root_name: 'projectZombie_2020'
 
     # a texture folder publish
     substancepainter_asset_texture_path_publish:
-        definition: '@asset_publish_area_substancepainter/textures/{Asset}_{texture_name}_v{version}.{texture_extension}'
+        definition: '@asset_publish_area_substancepainter/sourceimages/{sg_asset_type}/{Asset}/textures/{Asset}_{texture_name}_v{version}.{texture_extension}'
         root_name: 'projectZombie_2020'
 
     #
