@@ -198,6 +198,7 @@ paths:
     users_asset_root: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
     asset_publish_area_substancepainter: 02_prod
+    asset_publish_files_substancepainter: 02_prod/sourceimages/{sg_asset_type}/{Asset}
     
     ##########################################################################################
     # Project level paths
@@ -552,17 +553,17 @@ paths:
 
     # The location of published substance painter files
     substancepainter_asset_publish:
-        definition: '@asset_publish_area_substancepainter/assets/{sg_asset_type}/{Asset}/substancepainter/{name}.v{version}.spp'
+        definition: '@asset_root/substancepainter/{name}.v{version}.spp'
         root_name: 'projectZombie_2020'
 
      # a texture folder publish
     substancepainter_asset_textures_path_publish:
-        definition: '@asset_publish_area_substancepainter/sourceimages/{sg_asset_type}/{Asset}/textures/{Asset}_textures_v{version}'
+        definition: '@asset_publish_files_substancepainter/sourceimages/{sg_asset_type}/{Asset}/textures/{Asset}_textures_v{version}'
         root_name: 'projectZombie_2020'
 
     # a texture folder publish
     substancepainter_asset_texture_path_publish:
-        definition: '@asset_publish_area_substancepainter/sourceimages/{sg_asset_type}/{Asset}/textures/{Asset}_{texture_name}_v{version}.{texture_extension}'
+        definition: '@asset_publish_files_substancepainter/sourceimages/{sg_asset_type}/{Asset}/textures/{Asset}_{texture_name}_v{version}.{texture_extension}'
         root_name: 'projectZombie_2020'
 
     #
