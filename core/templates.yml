@@ -531,7 +531,7 @@ paths:
         root_name: 'projectZombie_2020'
     # define the location of a publish area
     asset_publish_area_substancepainter:
-        definition: '@asset_publish_files_substancepainter'
+        definition: ''@asset_root/substancepainter'
         root_name: 'projectZombie_2020'
 
     # The location of WIP files
