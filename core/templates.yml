@@ -198,10 +198,12 @@ paths:
     users_asset_root: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
     substance_file_publish: 02_prod/sourceimages/{sg_asset_type}/{Asset}
-    asset_work_post: 03_post/02_Work/{Sequence}/{Shot}/{Step}
-    asset_publish_post: 03_post/03_Publish/{Sequence}/{Shot}/{Step} 
-    sequence_editorial_work_post: 03_post/02_Work/{Sequence}/{Shot}
-    sequence_editorial_publish_post: 03_post/03_Publish/{Sequence}/{Shot}
+    asset_work_post: 03_post/02_Work/{sg_asset_type}/{Asset}/{Step}
+    asset_publish_post: 03_post/03_Publish/{sg_asset_type}/{Asset}/{Step}   
+    sequence_work_post: 03_post/02_Work/{Sequence}/{Shot}/{Step}
+    sequence_publish_post: 03_post/03_Publish/{Sequence}/{Shot}/{Step} 
+    sequence_editorial_work_post: 03_post/02_Work/{Sequence}/{Shot}/editorial
+    sequence_editorial_publish_post: 03_post/03_Publish/{Sequence}/{Shot}/editorial
 
     
     ##########################################################################################
@@ -213,7 +215,7 @@ paths:
     #
 
     hiero_project_work_area:
-        definition: '@sequence_editorial_work_post/editorial/hiero'
+        definition: '@sequence_editorial_work_post/hiero'
     # The location of WIP files
     hiero_project_work:
         definition: '@hiero_project_work_area/{name}_v{version}.hrox'
@@ -222,7 +224,7 @@ paths:
         definition: '@hiero_project_work_area/snapshots/{name}_v{version}_{timestamp}.hrox'
     # The location of published hiero files
     hiero_project_publish_area:
-        definition: '@sequence_editorial_work_post/editorial/hiero'
+        definition: '@sequence_editorial_publish_post/hiero'
     hiero_project_publish:
         definition: '@hiero_project_publish_area/{name}_v{version}.hrox'
 
@@ -406,10 +408,10 @@ paths:
 
     # define the location of a work area
     shot_work_area_nuke:
-        definition: '@asset_work_post/nuke'
+        definition: '@sequence_work_post/nuke'
     # define the location of a publish area
     shot_publish_area_nuke:
-        definition: '@asset_publish_post/nuke'
+        definition: '@sequence_publish_post/nuke'
     # The location of WIP script files
     nuke_shot_work:
         definition: '@shot_work_area_nuke/{name}.v{version}.nk'
@@ -440,9 +442,9 @@ paths:
 
     # export of shot asset data from hiero
         hiero_plate_path:
-            definition: '@sequence_editorial_work_post/editorial/hiero/{YYYY}_{MM}_{DD}/plates/{project}_{Shot}.mov'
+            definition: '@sequence_editorial_work_post/hiero/{YYYY}_{MM}_{DD}/plates/{project}_{Shot}.mov'
         hiero_render_path:
-            definition: '@sequence_editorial_work_post/editorial/hiero/{YYYY}_{MM}_{DD}/renders/{project}_{Shot}.{SEQ}.dpx'
+            definition: '@sequence_editorial_work_post/hiero/{YYYY}_{MM}_{DD}/renders/{project}_{Shot}.{SEQ}.dpx'
 
 
     #

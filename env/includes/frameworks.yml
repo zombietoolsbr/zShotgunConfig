@@ -76,4 +76,4 @@ frameworks:
     location:
       type: git
       path: https://github.com/zombietoolsbr/tk-framework-adobe-ppro.git
-      version: v1.0.6
+      version: 1.0.6
