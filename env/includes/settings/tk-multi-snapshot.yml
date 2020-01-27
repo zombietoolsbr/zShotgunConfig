@@ -186,3 +186,18 @@ settings.tk-multi-snapshot.substancepainter.asset_step:
   location: "@apps.tk-multi-snapshot.location"
 
 ################################################################################
+
+# ---- Premiere
+# asset step
+settings.tk-multi-snapshot.premiere.asset_step:
+  template_snapshot: premiere_asset_snapshot
+  template_work: premiere_asset_work
+  hook_scene_operation: "{engine}/tk-multi-snapshot/basic/scene_operation.py"
+  location: "@apps.tk-multi-snapshot.location"
+
+# shot step
+settings.tk-multi-snapshot.premiere.shot_step:
+  template_snapshot: premiere_shot_snapshot
+  template_work: premiere_shot_work
+  hook_scene_operation: "{engine}/tk-multi-snapshot/basic/scene_operation.py"
+  location: "@apps.tk-multi-snapshot.location"
