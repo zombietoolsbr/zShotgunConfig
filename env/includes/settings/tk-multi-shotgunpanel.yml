@@ -343,3 +343,27 @@ settings.tk-multi-shotgunpanel.substancepainter:
     - actions: [quicktime_clipboard, sequence_clipboard, add_to_playlist]
       filters: {}
   location: "@apps.tk-multi-shotgunpanel.location"
+
+
+# premiere 
+settings.tk-multi-shotgunpanel.premiere:
+  action_mappings:
+    PublishedFile:
+    - actions: [import]
+      filters: {published_file_type: Premiere Project}
+    - actions: [import]
+      filters: {published_file_type: Photoshop Image}
+    - actions: [import]
+      filters: {published_file_type: Rendered Image}
+    - actions: [import]
+      filters: {published_file_type: Image}
+    - actions: [import]
+      filters: {published_file_type: Texture}
+    Task:
+    - actions: [assign_task, task_to_ip]
+      filters: {}
+    Version:
+    - actions: [quicktime_clipboard, sequence_clipboard, add_to_playlist]
+      filters: {}
+  actions_hook: "{engine}/tk-multi-shotgunpanel/basic/scene_actions.py"
+  location: "@apps.tk-multi-shotgunpanel.location"

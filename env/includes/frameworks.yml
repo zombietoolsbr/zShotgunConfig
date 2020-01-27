@@ -70,3 +70,10 @@ frameworks:
       path: https://github.com/shotgunsoftware/tk-framework-unrealqt.git
       branch: master
       version: 58c2f7b
+
+# premiere Pro CC 
+  tk-framework-adobe-ppro_v1.x.x:
+    location:
+      type: git
+      path: https://github.com/zombietoolsbr/tk-framework-adobe-ppro.git
+      version: v1.0.6

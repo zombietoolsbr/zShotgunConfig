@@ -117,6 +117,11 @@ engines.tk-vred.location:
 # Substance Painter
 engines.tk-substancepainter.location:
   type: git
-  branch: master
   path: https://github.com/zombietoolsbr/tk-substancepainter.git
   version: v1.2.1
+
+# Premiere
+engines.tk-premiere.location:
+  type: git
+  path: https://github.com/Vintata/tk-premiere.git
+  version: v0.0.3
