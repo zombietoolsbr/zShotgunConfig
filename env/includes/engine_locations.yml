@@ -124,4 +124,4 @@ engines.tk-substancepainter.location:
 engines.tk-premiere.location:
   type: git
   path: https://github.com/zombietoolsbr/tk-premiere.git
-  version: v0.0.3
+  version: 0.0.3
