@@ -198,6 +198,8 @@ paths:
     users_asset_root: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
     substance_file_publish: 02_prod/sourceimages/{sg_asset_type}/{Asset}
+    shot_work_nuke: 03_post/02_Work/{Sequence}/{Shot}/{Step}
+    shot_publish_nuke: 03_post/03_Publish/{Sequence}/{Shot}/{Step} 
 
     
     ##########################################################################################
@@ -401,34 +403,34 @@ paths:
     #
 
     # define the location of a work area
-#    shot_work_area_nuke:
-#        definition: '@shot_root/work/nuke'
+    shot_work_area_nuke:
+        definition: '@asset_work_nuke/nuke'
     # define the location of a publish area
-#    shot_publish_area_nuke:
-#        definition: '@shot_root/publish/nuke'
+    shot_publish_area_nuke:
+        definition: '@asset_publish_nuke/nuke'
     # The location of WIP script files
-#    nuke_shot_work:
-#        definition: '@shot_root/work/nuke/{name}.v{version}.nk'
+    nuke_shot_work:
+        definition: '@shot_work_area_nuke/{name}.v{version}.nk'
     # The location of backups of WIP files
-#    nuke_shot_snapshot:
-#        definition: '@shot_root/work/nuke/snapshots/{name}.v{version}.{timestamp}.nk'
+    nuke_shot_snapshot:
+        definition: '@shot_work_area_nuke/snapshots/{name}.v{version}.{timestamp}.nk'
     # The location of published nuke script files
-#    nuke_shot_publish:
-#        definition: '@shot_root/publish/nuke/{name}.v{version}.nk'
+    nuke_shot_publish:
+        definition: '@shot_publish_area_nuke/{name}.v{version}.nk'
     # write node outputs
-#    nuke_shot_render_mono_dpx:
-#        definition: '@shot_root/work/images/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.dpx'
-#    nuke_shot_render_pub_mono_dpx:
-#        definition: '@shot_root/publish/elements/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.dpx'
-#    nuke_shot_render_stereo:
-#        definition: '@shot_root/work/images/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_{eye}_v{version}.{SEQ}.exr'
-#    nuke_shot_render_pub_stereo:
-#        definition: '@shot_root/publish/elements/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_{eye}_v{version}.{SEQ}.exr'
+    nuke_shot_render_mono_dpx:
+        definition: '@shot_work_area_nuke/images/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.dpx'
+    nuke_shot_render_pub_mono_dpx:
+        definition: '@shot_publish_area_nuke/elements/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.dpx'
+    nuke_shot_render_stereo:
+        definition: '@shot_work_area_nuke/images/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_{eye}_v{version}.{SEQ}.exr'
+    nuke_shot_render_pub_stereo:
+        definition: '@shot_publish_area_nuke/elements/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_{eye}_v{version}.{SEQ}.exr'
     # review output
-#    shot_quicktime_quick:
-#        definition: '@shot_root/review/quickdaily/{Shot}_{name}_{iteration}.mov'
-#    nuke_shot_render_movie:
-#        definition: '@shot_root/review/{Shot}_{name}_{nuke.output}_v{version}.mov'
+    shot_quicktime_quick:
+        definition: '@shot_work_area_nuke/review/quickdaily/{Shot}_{name}_{iteration}.mov'
+    nuke_shot_render_movie:
+        definition: '@shot_work_area_nuke/review/{Shot}_{name}_{nuke.output}_v{version}.mov'
 
     #
     # Hiero
@@ -650,30 +652,30 @@ paths:
     #
 
     # define the location of a work area
-#    asset_work_area_nuke:
-#        definition: '@asset_root/work/nuke'
+    asset_work_area_nuke:
+        definition: '@asset_work_nuke/nuke'
     # define the location of a publish area
-#    asset_publish_area_nuke:
-#        definition: '@asset_root/publish'
+    asset_publish_area_nuke:
+        definition: '@asset_publish_nuke/nuke'
     # outputs from the Shotgun Write Node for assets
-#    nuke_asset_render:
-#        definition: '@asset_root/work/images/{name}/v{version}/{width}x{height}/{Asset}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
-#    nuke_asset_render_pub:
-#        definition: '@asset_root/publish/elements/{name}/v{version}/{width}x{height}/{Asset}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+    nuke_asset_render:
+        definition: '@asset_work_area_nuke/images/{name}/v{version}/{width}x{height}/{Asset}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+    nuke_asset_render_pub:
+        definition: '@asset_publish_area_nuke/elements/{name}/v{version}/{width}x{height}/{Asset}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
     # review output
-#    nuke_asset_render_movie:
-#        definition: '@asset_root/review/{Asset}_{name}_{nuke.output}_v{version}.mov'
+    nuke_asset_render_movie:
+        definition: '@asset_work_area_nuke/review/{Asset}_{name}_{nuke.output}_v{version}.mov'
 #    asset_quicktime_quick:
-#        definition: '@asset_root/review/quickdaily/{Asset}_{name}_{iteration}.mov'
+        definition: 'asset_work_area_nuke/review/quickdaily/{Asset}_{name}_{iteration}.mov'
     # The location of WIP script files
-#    nuke_asset_work:
-#        definition: '@asset_root/work/nuke/{name}.v{version}.nk'
+    nuke_asset_work:
+        definition: '@asset_work_area_nuke/script_nuke/{name}.v{version}.nk'
     # The location of backups of WIP files
-#    nuke_asset_snapshot:
-#        definition: '@asset_root/work/nuke/snapshots/{name}.v{version}.{timestamp}.nk'
+    nuke_asset_snapshot:
+        definition: '@asset_work_area_nuke/script_nuke/snapshots/{name}.v{version}.{timestamp}.nk'
     # The location of published nuke script files
-#    nuke_asset_publish:
-#        definition: '@asset_root/publish/nuke/{name}.v{version}.nk'
+    nuke_asset_publish:
+        definition: '@asset_publish_area_nuke/script_nuke/{name}.v{version}.nk'
 
     #
     # Alias
