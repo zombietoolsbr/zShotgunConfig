@@ -414,3 +414,33 @@ settings.tk-multi-loader2.substancepainter:
     hierarchy: [entity, content]
   publish_filters: [["sg_status_list", "is_not", null]]
   location: "@apps.tk-multi-loader2.location"
+
+# premiere
+settings.tk-multi-loader2.premiere:
+  action_mappings:
+#    After Effects Project: [import]
+    Premiere Project: [import]
+    Photoshop Image: [import]
+    Rendered Image: [import]
+    Image: [import]
+    Texture: [import]
+  entities:
+  - caption: Assets
+    entity_type: Asset
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_asset_type, code]
+  - caption: Shots
+    entity_type: Shot
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_sequence, code]
+  - caption: My Tasks
+    entity_type: Task
+    filters:
+    - [task_assignees, is, '{context.user}']
+    - [project, is, '{context.project}']
+    hierarchy: [entity, content]
+  actions_hook: "{engine}/tk-multi-loader2/basic/scene_actions.py"
+  publish_filters: [["sg_status_list", "is_not", null]]
+  location: "@apps.tk-multi-loader2.location"
