@@ -198,12 +198,13 @@ paths:
     users_asset_root: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
     substance_file_publish: 02_prod/sourceimages/{sg_asset_type}/{Asset}
+    asset_work_post: 03_post/02_Work/{sg_asset_type}/{Asset}/{Step}
+    asset_publish_post: 03_post/03_Publish/{sg_asset_type}/{Asset}/{Step}   
     sequence_work_post: 03_post/02_Work/{Sequence}/{Shot}/{Step}
     sequence_publish_post: 03_post/03_Publish/{Sequence}/{Shot}/{Step} 
     sequence_editorial_work_post: 03_post/02_Work/{Sequence}/{Shot}/editorial
     sequence_editorial_publish_post: 03_post/03_Publish/{Sequence}/{Shot}/editorial
-    asset_work_post:
-    assetpublish_post:
+
     
     ##########################################################################################
     # Project level paths
@@ -407,10 +408,10 @@ paths:
 
     # define the location of a work area
     shot_work_area_nuke:
-        definition: '@asset_work_post/nuke'
+        definition: '@sequence_work_post/nuke'
     # define the location of a publish area
     shot_publish_area_nuke:
-        definition: '@asset_publish_post/nuke'
+        definition: '@sequence_publish_post/nuke'
     # The location of WIP script files
     nuke_shot_work:
         definition: '@shot_work_area_nuke/{name}.v{version}.nk'
