@@ -200,6 +200,8 @@ paths:
     substance_file_publish: 02_prod/sourceimages/{sg_asset_type}/{Asset}
     asset_work_post: 03_post/02_Work/{Sequence}/{Shot}/{Step}
     asset_publish_post: 03_post/03_Publish/{Sequence}/{Shot}/{Step} 
+    sequence_editorial_work_post: 03_post/02_Work/{Sequence}/{Shot}
+    sequence_editorial_publish_post: 03_post/03_Publish/{Sequence}/{Shot}
 
     
     ##########################################################################################
@@ -210,19 +212,19 @@ paths:
     # Hiero
     #
 
+    hiero_project_work_area:
+        definition: '@sequence_editorial_work_post/editorial/hiero'
     # The location of WIP files
-#    hiero_project_work:
-#        definition: 'editorial/work/{name}_v{version}.hrox'
-#    hiero_project_work_area:
-#        definition: 'editorial/work'
+    hiero_project_work:
+        definition: '@hiero_project_work_area/{name}_v{version}.hrox'
     # The location of backups of WIP files
-#    hiero_project_snapshot:
-#        definition: 'editorial/work/snapshots/{name}_v{version}_{timestamp}.hrox'
+    hiero_project_snapshot:
+        definition: '@hiero_project_work_area/snapshots/{name}_v{version}_{timestamp}.hrox'
     # The location of published hiero files
-#    hiero_project_publish:
-#        definition: 'editorial/publish/{name}_v{version}.hrox'
-#    hiero_project_publish_area:
-#        definition: 'editorial/publish'
+    hiero_project_publish_area:
+        definition: '@sequence_editorial_work_post/editorial/hiero'
+    hiero_project_publish:
+        definition: '@hiero_project_publish_area/{name}_v{version}.hrox'
 
 
     ##########################################################################################
@@ -437,10 +439,42 @@ paths:
     #
 
     # export of shot asset data from hiero
-#    hiero_plate_path:
-#        definition: 'sequences/{Sequence}/{Shot}/editorial/{YYYY}_{MM}_{DD}/plates/{project}_{Shot}.mov'
-#    hiero_render_path:
-#        definition: 'sequences/{Sequence}/{Shot}/editorial/{YYYY}_{MM}_{DD}/renders/{project}_{Shot}.{SEQ}.dpx'
+        hiero_plate_path:
+            definition: '@sequence_editorial_work_post/editorial/hiero/{YYYY}_{MM}_{DD}/plates/{project}_{Shot}.mov'
+        hiero_render_path:
+            definition: '@sequence_editorial_work_post/editorial/hiero/{YYYY}_{MM}_{DD}/renders/{project}_{Shot}.{SEQ}.dpx'
+
+
+    #
+    # Premiere
+    #
+
+    shot_publish_area_premiere:
+        definition: '@asset_publish_post/premiere'
+    premiere_shot_publish:
+        definition: '@shot_publish_area_premiere/{name}.v{version}.prproj'
+
+    shot_work_area_premiere:
+        definition: '@asset_work_post/premiere'
+    premiere_shot_work:
+        definition: '@shot_work_area_premiere/{name}.v{version}.prproj'
+    premiere_shot_snapshot:
+        definition: '@shot_work_area_premiere/snapshots/{name}.v{version}.{timestamp}.prproj'
+
+    project_work_area_premiere:
+            definition: '@sequence_editorial_work_post/editorial/premiere'
+    premiere_project_work:
+        definition: '@project_work_area_premiere/{name}.v{version}.prproj'
+
+    project_publish_area_premiere:
+        definition: '@sequence_editorial_publish_post/editorial/premiere'
+    premiere_project_publish:
+        definition: '@project_publish_area_premiere/{name}.v{version}.prproj'
+
+
+
+
+
 
     ##########################################################################################
     # Asset pipeline
