@@ -687,3 +687,59 @@ settings.tk-multi-workfiles2.substancepainter.asset_step:
   template_work: substancepainter_asset_work
   template_work_area: asset_work_area_substancepainter
   location: "@apps.tk-multi-workfiles2.location"
+
+# project
+settings.tk-multi-workfiles2.premiere:
+  template_publish: premiere_project_publish
+  template_publish_area: project_publish_area_premiere
+  template_work: premiere_project_work
+  template_work_area: project_work_area_premiere
+  entities:
+  - caption: Assets
+    entity_type: Asset
+    hierarchy: [sg_asset_type, code]
+    filters:
+    sub_hierarchy:
+      entity_type: Task
+      filters:
+      link_field: entity
+      hierarchy: [step]
+  - caption: Shots
+    entity_type: Shot
+    filters:
+    hierarchy: [sg_sequence, code]
+    sub_hierarchy:
+      entity_type: Task
+      filters:
+      link_field: entity
+      hierarchy: [step]
+  hook_scene_operation: "{engine}/tk-multi-workfiles2/basic/scene_operation.py"
+  location: "@apps.tk-multi-workfiles2.location"
+
+# shot_step
+settings.tk-multi-workfiles2.premiere.shot_step:
+  template_publish: premiere_shot_publish
+  template_publish_area: shot_publish_area_premiere
+  template_work: premiere_shot_work
+  template_work_area: shot_work_area_premiere
+  entities:
+  - caption: Assets
+    entity_type: Asset
+    hierarchy: [sg_asset_type, code]
+    filters:
+    sub_hierarchy:
+      entity_type: Task
+      filters:
+      link_field: entity
+      hierarchy: [step]
+  - caption: Shots
+    entity_type: Shot
+    filters:
+    hierarchy: [sg_sequence, code]
+    sub_hierarchy:
+      entity_type: Task
+      filters:
+      link_field: entity
+      hierarchy: [step]
+  hook_scene_operation: "{engine}/tk-multi-workfiles2/basic/scene_operation.py"
+  location: "@apps.tk-multi-workfiles2.location"
