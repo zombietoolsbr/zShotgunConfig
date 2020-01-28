@@ -114,6 +114,8 @@ class MayaSessionCollector(HookBaseClass):
             self._collect_session_geometry(item)
         
         self._collect_meshes(item)
+        self._collect_cameras(item)
+
 
     def collect_current_maya_session(self, settings, parent_item):
         """
@@ -387,3 +389,51 @@ def _collect_meshes(self, parent_item):
            # finally, add information to the mesh item that can be used
            # by the publish plugin to identify and export it properly
            mesh_item.properties["object"] = object
+
+           def _collect_cameras(self, parent_item):
+       """
+       Creates items for each camera in the session.
+
+       :param parent_item: The maya session parent item
+       """
+
+       # build a path for the icon to use for each item. the disk
+       # location refers to the path of this hook file. this means that
+       # the icon should live one level above the hook in an "icons"
+       # folder.
+       icon_path = os.path.join(
+           self.disk_location,
+           os.pardir,
+           "icons",
+           "camera.png"
+       )
+
+       # iterate over each camera and create an item for it
+       for camera_shape in cmds.ls(cameras=True):
+
+           # try to determine the camera display name
+           try:
+               camera_name = cmds.listRelatives(camera_shape, parent=True)[0]
+           except Exception:
+               # could not determine the name, just use the shape
+               camera_name = camera_shape
+
+           # create a new item parented to the supplied session item. We
+           # define an item type (maya.session.camera) that will be
+           # used by an associated camera publish plugin as it searches for
+           # items to act upon. We also give the item a display type and
+           # display name. In the future, other publish plugins might attach to
+           # these camera items to perform other actions
+           cam_item = parent_item.create_item(
+               "maya.session.camera",
+               "Camera",
+               camera_name
+           )
+
+           # set the icon for the item
+           cam_item.set_icon_from_path(icon_path)
+
+           # store the camera name so that any attached plugin knows which
+           # camera this item represents!
+           cam_item.properties["camera_name"] = camera_name
+           cam_item.properties["camera_shape"] = camera_shape
