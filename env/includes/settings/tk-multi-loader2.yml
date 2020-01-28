@@ -15,8 +15,8 @@ includes:
 
 ################################################################################
 
-# 3dsmax
-settings.tk-multi-loader2.3dsmax:
+# 3dsmaxplus
+settings.tk-multi-loader2.3dsmaxplus: &settings_tk-multi-loader2_3dsmaxplus
   action_mappings:
     3dsmax Scene: [import, reference]
     Alembic Cache: [import]
@@ -40,6 +40,31 @@ settings.tk-multi-loader2.3dsmax:
     - [task_assignees, is, '{context.user}']
     - [project, is, '{context.project}']
     hierarchy: [entity, content]
+  location: "@apps.tk-multi-loader2.location"
+
+# 3dsmax
+# Uses the same settings, but a different hook.
+settings.tk-multi-loader2.3dsmax:
+  <<: *settings_tk-multi-loader2_3dsmaxplus
+  actions_hook: "{engine}/tk-multi-loader2/basic/scene_actions.py"
+
+
+# flame
+settings.tk-multi-loader2.flame:
+  actions_hook: '{engine}/tk-multi-loader2/flame_loader_actions.py'
+  action_mappings:
+    Flame Batch File: [load_setup]
+    Flame Quicktime: [load_clip]
+    Flame Render: [load_clip]
+    Flame OpenClip: [load_clip]
+    Photoshop Image: [load_clip]
+    Rendered Image: [load_clip]
+    Image: [load_clip]
+    Movie: [load_clip]
+    Texture: [load_clip]
+  entity_mappings:
+    Shot: [load_batch]
+    CutItem: [load_batch]
   location: "@apps.tk-multi-loader2.location"
 
 # houdini
@@ -157,6 +182,32 @@ settings.tk-multi-loader2.nuke:
   location: "@apps.tk-multi-loader2.location"
 
 # nuke studio (actions hook)
+settings.tk-multi-loader2.nukestudio.project:
+  actions_hook: '{self}/tk-nuke_actions.py'
+  action_mappings:
+    Image: [clip_import]
+    Movie: [clip_import]
+    Rendered Image: [clip_import]
+  entities:
+  - caption: Assets
+    entity_type: Asset
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_asset_type, code]
+  - caption: Shots
+    entity_type: Shot
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_sequence, code]
+  - caption: My Tasks
+    entity_type: Task
+    filters:
+    - [task_assignees, is, '{context.user}']
+    - [project, is, '{context.project}']
+    hierarchy: [entity, content]
+  publish_filters: [["sg_status_list", "is_not", null]]
+  location: "@apps.tk-multi-loader2.location"
+
 settings.tk-multi-loader2.nukestudio:
   actions_hook: '{self}/tk-nuke_actions.py'
   action_mappings:
@@ -215,6 +266,36 @@ settings.tk-multi-loader2.photoshop:
   publish_filters: [["sg_status_list", "is_not", null]]
   location: "@apps.tk-multi-loader2.location"
 
+# after effects
+settings.tk-multi-loader2.aftereffects:
+  action_mappings:
+    After Effects Project: [add_to_project, add_to_comp]
+    Maya Scene: [add_to_project, add_to_comp]
+    Photoshop Image: [add_to_project, add_to_comp]
+    Rendered Image: [add_to_project, add_to_comp]
+    Image: [add_to_project, add_to_comp]
+    Texture: [add_to_project, add_to_comp]
+  entities:
+  - caption: Assets
+    entity_type: Asset
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_asset_type, code]
+  - caption: Shots
+    entity_type: Shot
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_sequence, code]
+  - caption: My Tasks
+    entity_type: Task
+    filters:
+    - [task_assignees, is, '{context.user}']
+    - [project, is, '{context.project}']
+    hierarchy: [entity, content]
+  actions_hook: "{engine}/tk-multi-loader2/basic/scene_actions.py"
+  publish_filters: [["sg_status_list", "is_not", null]]
+  location: "@apps.tk-multi-loader2.location"
+
 # motion builder
 settings.tk-multi-loader2.motionbuilder:
   entities:
@@ -236,3 +317,133 @@ settings.tk-multi-loader2.motionbuilder:
     hierarchy: [entity, content]
   location: "@apps.tk-multi-loader2.location"
 
+# alias
+settings.tk-multi-loader2.alias:
+  action_mappings:
+    Alias File: [import]
+    Wref File: [reference]
+    Igs File: [import]
+    Stp File: [import]
+    Stl File: [import]
+    Jt File: [import]
+    Catpart File: [import]
+    Fbx File: [import]
+    Image: [texture_node]
+    Photoshop Image: [texture_node]
+  entities:
+  - caption: Assets
+    entity_type: Asset
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_asset_type, code]
+  - caption: My Tasks
+    entity_type: Task
+    filters:
+    - [task_assignees, is, '{context.user}']
+    - [project, is, '{context.project}']
+    hierarchy: [entity, content]
+  actions_hook: "{engine}/tk-multi-loader2/basic/scene_actions.py"
+  publish_filters: [["sg_status_list", "is_not", null]]
+  location: "@apps.tk-multi-loader2.location"
+
+# VRED
+settings.tk-multi-loader2.vred:
+  action_mappings:
+    Alias File: [import]
+    Igs File: [import]
+    Stp File: [import]
+    Stl File: [import]
+    Jt File: [import]
+    Catpart File: [import]
+    Fbx File: [import]
+    VRED Scene: [load]
+    Osb File: [import]
+  entities:
+  - caption: Assets
+    entity_type: Asset
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_asset_type, code]
+  - caption: My Tasks
+    entity_type: Task
+    filters:
+    - [task_assignees, is, '{context.user}']
+    - [project, is, '{context.project}']
+    hierarchy: [entity, content]
+  actions_hook: "{engine}/tk-multi-loader2/basic/scene_actions.py"
+  publish_filters: [["sg_status_list", "is_not", null]]
+  location: "@apps.tk-multi-loader2.location"
+
+# Author: Diego Garcia Huerta
+# Contact: https://www.linkedin.com/in/diegogh/
+#
+# YOU SHOULD MERGE these entries into your settings file, as
+# THIS FILE BY ITSELF WILL NOT WORK 
+# These are the additions to get substancepainter engine up and running with the 
+# default tk-apps for this environment
+
+# substance painter
+settings.tk-multi-loader2.substancepainter:
+  actions_hook: '{engine}/tk-multi-loader2/tk-substancepainter_actions.py'
+  action_mappings:
+    Image: [environment, colorlut, alpha, texture]
+    Texture: [environment, colorlut, alpha, texture]
+    Rendered Image: [environment, colorlut, alpha, texture]
+    Substance Material Preset: [preset]
+    Sppr File: [preset]
+    PopcornFX : [script]
+    Pkfx File : [script]
+    Shader: [shader]
+    Glsl File: [shader]
+    Substance Export Preset: [export]
+    Spexp File: [export]
+    Substance Smart Material: [smartmaterial]
+    Spsm File: [smartmaterial]
+    Substance File: [basematerial, alpha, texture, filter, procedural, generator]
+    Sbsar File: [basematerial, alpha, texture, filter, procedural, generator]
+    Substance Smart Mask: [smartmask]
+    Spmsk File: [smartmask]
+  entities:
+  - caption: Assets
+    entity_type: Asset
+    filters:
+    - [project, is, "{context.project}"]
+    hierarchy: [sg_asset_type, code]
+  - caption: My Tasks
+    entity_type: Task
+    filters:
+    - [task_assignees, is, "{context.user}"]
+    - [project, is, "{context.project}"]
+    hierarchy: [entity, content]
+  publish_filters: [["sg_status_list", "is_not", null]]
+  location: "@apps.tk-multi-loader2.location"
+
+# premiere
+settings.tk-multi-loader2.premiere:
+  action_mappings:
+#    After Effects Project: [import]
+    Premiere Project: [import]
+    Photoshop Image: [import]
+    Rendered Image: [import]
+    Image: [import]
+    Texture: [import]
+  entities:
+  - caption: Assets
+    entity_type: Asset
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_asset_type, code]
+  - caption: Shots
+    entity_type: Shot
+    filters:
+    - [project, is, '{context.project}']
+    hierarchy: [sg_sequence, code]
+  - caption: My Tasks
+    entity_type: Task
+    filters:
+    - [task_assignees, is, '{context.user}']
+    - [project, is, '{context.project}']
+    hierarchy: [entity, content]
+  actions_hook: "{engine}/tk-multi-loader2/basic/scene_actions.py"
+  publish_filters: [["sg_status_list", "is_not", null]]
+  location: "@apps.tk-multi-loader2.location"
