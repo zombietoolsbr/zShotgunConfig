@@ -560,6 +560,10 @@ paths:
     maya_asset_publish:
         definition: '@asset_root/maya/{name}.v{version}.{maya_extension}'
 
+    # The location where maya shader networks are written/published
+    maya_shader_network_publish:
+        definition: '@asset_root/maya/surfacing/{name}.v{version}.ma'
+
     #
     # Substance Painter
     #
