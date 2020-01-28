@@ -191,9 +191,9 @@ settings.tk-multi-publish2.maya.asset_step:
     settings:
         Publish Template: asset_alembic_cache
   - name: Publish Shaders
-      hook: "{self}/publish_file.py:{config}/tk-multi-publish2/maya/publish_shader_network.py"
-      settings:
-          Publish Template: maya_shader_network_publish
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/maya/publish_shader_network.py"
+    settings:
+        Publish Template: maya_shader_network_publish
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
