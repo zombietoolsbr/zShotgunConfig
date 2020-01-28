@@ -51,9 +51,9 @@ apps.tk-multi-loader2.location:
 
 # publish2
 apps.tk-multi-publish2.location:
-  type: git
-  path: https://github.com/zombietoolsbr/tk-multi-publish2.git
-  version: zMPv1.0
+  type: app_store
+  name: tk-multi-publish2
+  version: v2.4.1
 
 # pythonconsole
 apps.tk-multi-pythonconsole.location:
