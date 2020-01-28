@@ -63,6 +63,13 @@ frameworks:
       type: app_store
       name: tk-framework-widget
 
+  # desktopclient - A client for Shotgun Create
+  tk-framework-desktopclient_v0.x.x:
+    location:
+      version: v0.0.9
+      type: app_store
+      name: tk-framework-desktopclient
+
 # unrealqt - PySide build for Unreal (Windows-only)
   tk-framework-unrealqt_v1.x.x:
     location:
