@@ -320,6 +320,9 @@ paths:
     # The location of published maya files
     maya_shot_publish:
         definition: '@shot_root/{name}.v{version}.{maya_extension}'
+    # The location of published maya cameras
+    maya_shot_camera_publish:
+        definition: '@shot_root/cameras/{name}.v{version}.fbx'
 
 
     #
