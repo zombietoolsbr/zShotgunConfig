@@ -1,4 +1,4 @@
-﻿# Copyright (c) 2017 Shotgun Software Inc.
+# Copyright (c) 2017 Shotgun Software Inc.
 #
 # CONFIDENTIAL AND PROPRIETARY
 #
@@ -35,6 +35,7 @@ class MayaShaderPublishPlugin(HookBaseClass):
     def description(self):
         """
         Verbose, multi-line description of what the plugin does (:class:`str`).
+
         The string can contain html for formatting for display in the UI (any
         html tags supported by Qt's rich text engine).
         """
@@ -52,8 +53,10 @@ class MayaShaderPublishPlugin(HookBaseClass):
     def settings(self):
         """
         A :class:`dict` defining the configuration interface for this plugin.
+
         The dictionary can include any number of settings required by the
         plugin, and takes the form::
+
             {
                 <setting_name>: {
                     "type": <type>,
@@ -67,20 +70,25 @@ class MayaShaderPublishPlugin(HookBaseClass):
                 },
                 ...
             }
+
         The keys in the dictionary represent the names of the settings. The
         values are a dictionary comprised of 3 additional key/value pairs.
+
         * ``type``: The type of the setting. This should correspond to one of
           the data types that toolkit accepts for app and engine settings such
           as ``hook``, ``template``, ``string``, etc.
         * ``default``: The default value for the settings. This can be ``None``.
         * ``description``: A description of the setting as a string.
+
         The values configured for the plugin will be supplied via settings
         parameter in the :meth:`accept`, :meth:`validate`, :meth:`publish`, and
         :meth:`finalize` methods.
+
         The values also drive the custom UI defined by the plugin whick allows
         artists to manipulate the settings at runtime. See the
         :meth:`create_settings_widget`, :meth:`set_ui_settings`, and
         :meth:`get_ui_settings` for additional information.
+
         .. note:: See the hooks defined in the publisher app's ``hooks/`` folder
            for additional example implementations.
         """
@@ -108,14 +116,17 @@ class MayaShaderPublishPlugin(HookBaseClass):
         """
         A :class:`list` of item type wildcard :class:`str` objects that this
         plugin is interested in.
+
         As items are collected by the collector hook, they are given an item
         type string (see :meth:`~.processing.Item.create_item`). The strings
         provided by this property will be compared to each collected item's
         type.
+
         Only items with types matching entries in this list will be considered
         by the :meth:`accept` method. As such, this method makes it possible to
         quickly identify which items the plugin may be interested in. Any
         sophisticated acceptance logic is deferred to the :meth:`accept` method.
+
         Strings can contain glob patters such as ``*``, for example ``["maya.*",
         "file.maya"]``.
         """
@@ -129,18 +140,24 @@ class MayaShaderPublishPlugin(HookBaseClass):
         """
         This method is called by the publisher to see if the plugin accepts the
         supplied item for processing.
+
         Only items matching the filters defined via the :data:`item_filters`
         property will be presented to this method.
+
         A publish task will be generated for each item accepted here.
+
         This method returns a :class:`dict` of the following form::
+
             {
                 "accepted": <bool>,
                 "enabled": <bool>,
                 "visible": <bool>,
                 "checked": <bool>,
             }
+
         The keys correspond to the acceptance state of the supplied item. Not
         all keys are required. The keys are defined as follows:
+
         * ``accepted``: Indicates if the plugin is interested in this value at all.
           If ``False``, no task will be created for this plugin. Required.
         * ``enabled``: If ``True``, the created task will be enabled in the UI,
@@ -150,17 +167,21 @@ class MayaShaderPublishPlugin(HookBaseClass):
           otherwise it will be hidden. Optional, ``True`` by default.
         * ``checked``: If ``True``, the created task will be checked in the UI,
           otherwise it will be unchecked. Optional, ``True`` by default.
+
         In addition to the item, the configured settings for this plugin are
         supplied. The information provided by each of these arguments can be
         used to decide whether to accept the item.
+
         For example, the item's ``properties`` :class:`dict` may house meta data
         about the item, populated during collection. This data can be used to
         inform the acceptance logic.
+
         :param dict settings: The keys are strings, matching the keys returned
             in the :data:`settings` property. The values are
             :class:`~.processing.Setting` instances.
         :param item: The :class:`~.processing.Item` instance to process for
             acceptance.
+
         :returns: dictionary with boolean keys accepted, required and enabled
         """
 
@@ -211,17 +232,21 @@ class MayaShaderPublishPlugin(HookBaseClass):
     def validate(self, settings, item):
         """
         Validates the given item, ensuring it is ok to publish.
+
         Returns a boolean to indicate whether the item is ready to publish.
         Returning ``True`` will indicate that the item is ready to publish. If
         ``False`` is returned, the publisher will disallow publishing of the
         item.
+
         An exception can also be raised to indicate validation failed.
         When an exception is raised, the error message will be displayed as a
         tooltip on the task as well as in the logging view of the publisher.
+
         :param dict settings: The keys are strings, matching the keys returned
             in the :data:`settings` property. The values are
             :class:`~.processing.Setting` instances.
         :param item: The :class:`~.processing.Item` instance to validate.
+
         :returns: True if item is valid, False otherwise.
         """
 
@@ -298,8 +323,10 @@ class MayaShaderPublishPlugin(HookBaseClass):
     def publish(self, settings, item):
         """
         Executes the publish logic for the given item and settings.
+
         Any raised exceptions will indicate that the publish pass has failed and
         the publisher will stop execution.
+
         :param dict settings: The keys are strings, matching the keys returned
             in the :data:`settings` property. The values are
             :class:`~.processing.Setting` instances.
