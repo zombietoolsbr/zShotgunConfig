@@ -119,7 +119,7 @@ settings.tk-multi-loader2.mari:
 
 # maya
 settings.tk-multi-loader2.maya:
-  action_hook: '{config}/tk-multi-loader2/tk-maya_actions.py'
+  actions_hook: '{config}/tk-multi-loader2/tk-maya_actions.py'
   action_mappings:
     Alembic Cache: [reference, import]
     FBX Camera: [reference, import]
