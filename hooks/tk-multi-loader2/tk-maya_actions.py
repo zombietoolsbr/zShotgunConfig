@@ -192,10 +192,9 @@ class MayaActions(HookBaseClass):
         namespace = "%s %s" % (sg_publish_data.get("entity").get("name"), sg_publish_data.get("name"))
         namespace = namespace.replace(" ", "_")
                 
-        pm.system.createReference(path, 
-                                  loadReferenceDepth= "all", 
-                                  mergeNamespacesOnClash=False, 
-                                  namespace=namespace)
+        pm.system.createReference(path,  
+                                  mergeNamespacesOnClash=True, 
+                                  namespace=":")
 
         reference_node = cmds.referenceQuery(path, referenceNode=True)
         _hookup_shaders(reference_node)
