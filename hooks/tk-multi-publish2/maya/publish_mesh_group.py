@@ -92,7 +92,7 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
         accept() method. Strings can contain glob patters such as *, for example
         ["maya.*", "file.maya"]
         """
-        return ["maya.session.geometry"]
+        return ["maya.session.alembic"]
 
     def accept(self, settings, item):
         """
@@ -120,9 +120,11 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
         :returns: dictionary with boolean keys accepted, required and enabled
         """
 
-        accepted = True
+        
         publisher = self.parent
         template_name = settings["Publish Template"].value
+
+        meshGroup_name = item.properties.get("groupName")
 
         # ensure a work file template is available on the parent item
         work_template = item.parent.properties.get("work_template")
@@ -164,15 +166,24 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
             "checked": True
         }
 
-    def validate(self, settings, item):
+   def validate(self, settings, item):
         """
-        Validates the given item to check that it is ok to publish. Returns a
-        boolean to indicate validity.
+        Validates the given item, ensuring it is ok to publish.
 
-        :param settings: Dictionary of Settings. The keys are strings, matching
-            the keys returned in the settings property. The values are `Setting`
-            instances.
-        :param item: Item to process
+        Returns a boolean to indicate whether the item is ready to publish.
+        Returning ``True`` will indicate that the item is ready to publish. If
+        ``False`` is returned, the publisher will disallow publishing of the
+        item.
+
+        An exception can also be raised to indicate validation failed.
+        When an exception is raised, the error message will be displayed as a
+        tooltip on the task as well as in the logging view of the publisher.
+
+        :param dict settings: The keys are strings, matching the keys returned
+            in the :data:`settings` property. The values are
+            :class:`~.processing.Setting` instances.
+        :param item: The :class:`~.processing.Item` instance to validate.
+
         :returns: True if item is valid, False otherwise.
         """
 
@@ -190,15 +201,20 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
             )
             raise Exception(error_msg)
 
-        # get the normalized path
+        # get the normalized path. checks that separators are matching the
+        # current operating system, removal of trailing separators and removal
+        # of double separators, etc.
         path = sgtk.util.ShotgunPath.normalize(path)
 
+        object_name = item.properties["groupName"]
+
         # check that there is still geometry in the scene:
-        if not cmds.ls(geometry=True, noIntermediate=True):
+        if (not cmds.ls(assemblies=True) or
+            not cmds.ls(object_name, dag=True, type="mesh")):
             error_msg = (
-                "Validation failed because there is no geometry in the scene "
-                "to be exported. You can uncheck this plugin or create "
-                "geometry to export to avoid this error."
+                "Validation failed because there are no meshes in the scene "
+                "to export shaders for. You can uncheck this plugin or create "
+                "meshes with shaders to export to avoid this error."
             )
             self.logger.error(error_msg)
             raise Exception(error_msg)
@@ -211,6 +227,15 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
         # template:
         work_fields = work_template.get_fields(path)
 
+        # we want to override the {name} token of the publish path with the
+        # name of the object being exported. get the name stored by the
+        # collector and remove any non-alphanumeric characters
+        object_display = re.sub(r'[\W_]+', '', object_name)
+        work_fields["name"] = object_display
+
+        # set the display name as the name to use in SG to represent the publish
+        item.properties["publish_name"] = object_display
+
         # ensure the fields work for the publish template
         missing_keys = publish_template.missing_keys(work_fields)
         if missing_keys:
@@ -220,18 +245,16 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
             raise Exception(error_msg)
 
         # create the publish path by applying the fields. store it in the item's
-        # properties. This is the path we'll create and then publish in the base
-        # publish plugin. Also set the publish_path to be explicit.
+        # properties. Also set the publish_path to be explicit.
         item.properties["path"] = publish_template.apply_fields(work_fields)
         item.properties["publish_path"] = item.properties["path"]
-
 
         # use the work file's version number when publishing
         if "version" in work_fields:
             item.properties["publish_version"] = work_fields["version"]
 
         # run the base class validation
-        return super(MayaMeshGroupPublishPlugin, self).validate(
+        return super(MayaShaderPublishPlugin, self).validate(
             settings, item)
 
     def publish(self, settings, item):
@@ -253,7 +276,7 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
         publish_folder = os.path.dirname(publish_path)
         self.parent.ensure_folder_exists(publish_folder)
 
-        mesh_group = item.properties["object"]
+        mesh_group = item.properties["groupName"]
 
         
         # set the alembic args that make the most sense when working with Mari.
