@@ -257,7 +257,7 @@ def validate(self, settings, item):
         return super(MayaShaderPublishPlugin, self).validate(
             settings, item)
 
-    def publish(self, settings, item):
+def publish(self, settings, item):
         """
         Executes the publish logic for the given item and settings.
 
