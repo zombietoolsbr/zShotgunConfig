@@ -516,6 +516,7 @@ class MayaSessionCollector(HookBaseClass):
             # set the icon for the item
             alembic_item.set_icon_from_path(icon_path)
 
+
             # finally, add information to the mesh item that can be used
             # by the publish plugin to identify and export it properly
             alembic_item.properties["groupName"] = object
