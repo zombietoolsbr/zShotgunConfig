@@ -253,6 +253,9 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
         publish_folder = os.path.dirname(publish_path)
         self.parent.ensure_folder_exists(publish_folder)
 
+        mesh_group = item.properties["object"]
+
+        
         # set the alembic args that make the most sense when working with Mari.
         # These flags will ensure the export of an Alembic file that contains
         # all visible geometry from the current scene together with UV's and
@@ -284,6 +287,9 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
         # build the export command.  Note, use AbcExport -help in Maya for
         # more detailed Alembic export help
         abc_export_cmd = ("AbcExport -j \"%s\"" % " ".join(alembic_args))
+
+        cmds.select(mesh_group)
+
 
         # ...and execute it:
         try:
