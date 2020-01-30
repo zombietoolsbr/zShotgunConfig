@@ -115,7 +115,7 @@ class MayaSessionCollector(HookBaseClass):
 
         self._collect_meshes(item)
         self._collect_cameras(item)
-        self._collect_alembicGroup(item)
+        self._collect_meshGroup(item)
 
     def collect_current_maya_session(self, settings, parent_item):
         """
