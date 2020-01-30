@@ -451,61 +451,61 @@ class MayaSessionCollector(HookBaseClass):
 
 
     def _collect_meshGroup(self, parent_item):
-    """
-    Collect type mesh_group definitions and create publish items for them.
+        """
+        Collect type mesh_group definitions and create publish items for them.
 
-    :param parent_item: The maya session parent item
-    """
+        :param parent_item: The maya session parent item
+        """
 
-    # build a path for the icon to use for each item. the disk
-    # location refers to the path of this hook file. this means that
-    # the icon should live one level above the hook in an "icons"
-    # folder.
-    icon_path = os.path.join(
-        self.disk_location,
-        os.pardir,
-        "icons",
-        "alembic.png"
-    )
-
-    # iterate over all top-level transforms and create mesh items
-    # for any mesh.
-    for object in cmds.ls(assemblies=True, long=True):
-
-        if not cmds.ls(object, dag=True, type="mesh"):
-            # ignore non-meshes
-            continue
-        
-        getAllNodes = cmds.listRelatives(
-            object,
-            allDescendents = True
+        # build a path for the icon to use for each item. the disk
+        # location refers to the path of this hook file. this means that
+        # the icon should live one level above the hook in an "icons"
+        # folder.
+        icon_path = os.path.join(
+            self.disk_location,
+            os.pardir,
+            "icons",
+            "alembic.png"
         )
 
-        enumerateAlembicGroup = [
-            getAllNodes.index(i) for i in getAllNodes if "_master_GRP" in i 
-        ]
+        # iterate over all top-level transforms and create mesh items
+        # for any mesh.
+        for object in cmds.ls(assemblies=True, long=True):
 
-        for i in range(len(enumerateAlembicGroup)):
-            if cmds.ls(getAllNodes[enumerateAlembicGroup[i]], dag=True, type='mesh'):
-                groupName = getAllNodes[enumerateAlembicGroup[i]]
+            if not cmds.ls(object, dag=True, type="mesh"):
+                # ignore non-meshes
+                continue
+            
+            getAllNodes = cmds.listRelatives(
+                object,
+                allDescendents = True
+            )
+
+            enumerateAlembicGroup = [
+                getAllNodes.index(i) for i in getAllNodes if "_master_GRP" in i 
+            ]
+
+            for i in range(len(enumerateAlembicGroup)):
+                if cmds.ls(getAllNodes[enumerateAlembicGroup[i]], dag=True, type='mesh'):
+                    groupName = getAllNodes[enumerateAlembicGroup[i]]
 
 
-        
-        # create a new item parented to the supplied session item. We
-        # define an item type (maya.session.mesh) that will be
-        # used by an associated shader publish plugin as it searches for
-        # items to act upon. We also give the item a display type and
-        # display name (the group name). In the future, other publish
-        # plugins might attach to these mesh items to publish other things
-        alembic_item = parent_item.create_item(
-            "maya.session.alembic",
-            "Alembic",
-            groupName
-        )
-        
-        # set the icon for the item
-        alembic_item.set_icon_from_path(icon_path)
+            
+            # create a new item parented to the supplied session item. We
+            # define an item type (maya.session.mesh) that will be
+            # used by an associated shader publish plugin as it searches for
+            # items to act upon. We also give the item a display type and
+            # display name (the group name). In the future, other publish
+            # plugins might attach to these mesh items to publish other things
+            alembic_item = parent_item.create_item(
+                "maya.session.alembic",
+                "Alembic",
+                groupName
+            )
+            
+            # set the icon for the item
+            alembic_item.set_icon_from_path(icon_path)
 
-        # finally, add information to the mesh item that can be used
-        # by the publish plugin to identify and export it properly
-        alembic_item.properties["groupName"] = groupName
+            # finally, add information to the mesh item that can be used
+            # by the publish plugin to identify and export it properly
+            alembic_item.properties["groupName"] = groupName
