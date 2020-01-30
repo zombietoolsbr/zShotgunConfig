@@ -48,41 +48,65 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
     @property
     def settings(self):
         """
-        Dictionary defining the settings that this plugin expects to receive
-        through the settings parameter in the accept, validate, publish and
-        finalize methods.
+        A :class:`dict` defining the configuration interface for this plugin.
 
-        A dictionary on the following form::
+        The dictionary can include any number of settings required by the
+        plugin, and takes the form::
 
             {
-                "Settings Name": {
-                    "type": "settings_type",
-                    "default": "default_value",
-                    "description": "One line description of the setting"
+                <setting_name>: {
+                    "type": <type>,
+                    "default": <default>,
+                    "description": <description>
+                },
+                <setting_name>: {
+                    "type": <type>,
+                    "default": <default>,
+                    "description": <description>
+                },
+                ...
             }
 
-        The type string should be one of the data types that toolkit accepts as
-        part of its environment configuration.
+        The keys in the dictionary represent the names of the settings. The
+        values are a dictionary comprised of 3 additional key/value pairs.
+
+        * ``type``: The type of the setting. This should correspond to one of
+          the data types that toolkit accepts for app and engine settings such
+          as ``hook``, ``template``, ``string``, etc.
+        * ``default``: The default value for the settings. This can be ``None``.
+        * ``description``: A description of the setting as a string.
+
+        The values configured for the plugin will be supplied via settings
+        parameter in the :meth:`accept`, :meth:`validate`, :meth:`publish`, and
+        :meth:`finalize` methods.
+
+        The values also drive the custom UI defined by the plugin whick allows
+        artists to manipulate the settings at runtime. See the
+        :meth:`create_settings_widget`, :meth:`set_ui_settings`, and
+        :meth:`get_ui_settings` for additional information.
+
+        .. note:: See the hooks defined in the publisher app's ``hooks/`` folder
+           for additional example implementations.
         """
         # inherit the settings from the base publish plugin
-        base_settings = super(MayaMeshGroupPublishPlugin, self).settings or {}
+        plugin_settings = super(MayaMeshGroupPublishPlugin, self).settings or {}
 
         # settings specific to this class
-        maya_publish_settings = {
+        meshGroup_publish_settings = {
             "Publish Template": {
                 "type": "template",
                 "default": None,
-                "description": "Template path for published work files. Should"
-                               "correspond to a template defined in "
+                "description": "Template path for published shader networks. "
+                               "Should correspond to a template defined in "
                                "templates.yml.",
             }
         }
 
         # update the base settings
-        base_settings.update(maya_publish_settings)
+        plugin_settings.update(meshGroup_publish_settings)
 
-        return base_settings
-
+        return plugin_settings
+    
     @property
     def item_filters(self):
         """
@@ -92,7 +116,7 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
         accept() method. Strings can contain glob patters such as *, for example
         ["maya.*", "file.maya"]
         """
-        return ["maya.session.alembic"]
+        return ["maya.session.geometry"]
 
     def accept(self, settings, item):
         """
@@ -254,7 +278,7 @@ def validate(self, settings, item):
             item.properties["publish_version"] = work_fields["version"]
 
         # run the base class validation
-        return super(MayaShaderPublishPlugin, self).validate(
+        return super(MayaMeshGroupPublishPlugin, self).validate(
             settings, item)
 
 def publish(self, settings, item):
