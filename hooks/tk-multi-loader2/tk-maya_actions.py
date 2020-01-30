@@ -111,26 +111,20 @@ class MayaActions(HookBaseClass):
     def execute_multiple_actions(self, actions):
         """
         Executes the specified action on a list of items.
-
         The default implementation dispatches each item from ``actions`` to
         the ``execute_action`` method.
-
         The ``actions`` is a list of dictionaries holding all the actions to execute.
         Each entry will have the following values:
-
             name: Name of the action to execute
             sg_publish_data: Publish information coming from Shotgun
             params: Parameters passed down from the generate_actions hook.
-
         .. note::
             This is the default entry point for the hook. It reuses the ``execute_action``
             method for backward compatibility with hooks written for the previous
             version of the loader.
-
         .. note::
             The hook will stop applying the actions on the selection if an error
             is raised midway through.
-
         :param list actions: Action dictionaries.
         """
         for single_action in actions:
@@ -251,7 +245,6 @@ class MayaActions(HookBaseClass):
     def _create_image_plane(self, path, sg_publish_data):
         """
         Create a file texture node for a UDIM (Mari) texture
-
         :param path: Path to file.
         :param sg_publish_data: Shotgun data dictionary with all the standard
             publish fields.
@@ -343,4 +336,3 @@ def _hookup_shaders(reference_node):
                 # assign the shader to the object
                 cmds.select(node, replace=True)
                 cmds.hyperShade(assign=shader)
-
