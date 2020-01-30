@@ -470,6 +470,8 @@ class MayaSessionCollector(HookBaseClass):
 
         # iterate over all top-level transforms and create mesh items
         # for any mesh.
+        groupName = []
+        
         for object in cmds.ls(assemblies=True, long=True):
 
             if not cmds.ls(object, dag=True, type="mesh"):
@@ -487,7 +489,15 @@ class MayaSessionCollector(HookBaseClass):
 
             for i in range(len(enumerateAlembicGroup)):
                 if cmds.ls(getAllNodes[enumerateAlembicGroup[i]], dag=True, type='mesh'):
-                    groupName = getAllNodes[enumerateAlembicGroup[i]]
+                    nameGroup = getAllNodes[enumerateAlembicGroup[i]]
+                    groupName.append(nameGroup)
+
+
+                    
+        for object in groupName:
+            if not cmds.ls(object, dag=True, type="mesh"):
+                # ignore non-meshes
+                continue
 
 
             
@@ -500,7 +510,7 @@ class MayaSessionCollector(HookBaseClass):
             alembic_item = parent_item.create_item(
                 "maya.session.alembic",
                 "Alembic",
-                groupName
+                object
             )
             
             # set the icon for the item
@@ -508,4 +518,4 @@ class MayaSessionCollector(HookBaseClass):
 
             # finally, add information to the mesh item that can be used
             # by the publish plugin to identify and export it properly
-            alembic_item.properties["groupName"] = groupName
+            alembic_item.properties["groupName"] = object
