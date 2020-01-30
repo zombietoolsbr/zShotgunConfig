@@ -166,7 +166,7 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
             "checked": True
         }
 
-   def validate(self, settings, item):
+def validate(self, settings, item):
         """
         Validates the given item, ensuring it is ok to publish.
 
