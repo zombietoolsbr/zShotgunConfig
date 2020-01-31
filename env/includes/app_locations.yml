@@ -45,9 +45,11 @@ apps.tk-multi-launchapp.location:
 
 # loader2
 apps.tk-multi-loader2.location:
-  type: app_store
-  name: tk-multi-loader2
-  version: v1.19.6
+  type: git
+  branch: zombietoolsbr_multi_loader_v1.0
+  path: https://github.com/zombietoolsbr/tk-multi-loader2.git
+  version: v1.1
+
 
 # publish2
 apps.tk-multi-publish2.location:
