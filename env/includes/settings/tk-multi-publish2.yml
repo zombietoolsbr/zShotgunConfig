@@ -221,6 +221,10 @@ settings.tk-multi-publish2.maya.shot_step:
     settings:
         Publish Template: maya_shot_camera_publish
         Cameras: [camMain]
+  - name: Publish to Shotgun
+    hook: "{self}/publish_file.py:{config}/tk-multi-publish2/maya/publish_mesh_group.py"
+    settings:
+        Publish Template: shot_alembic_cache
   help_url: *help_url
   location: "@apps.tk-multi-publish2.location"
 
