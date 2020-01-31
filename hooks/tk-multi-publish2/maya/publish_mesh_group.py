@@ -143,6 +143,10 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
 
         :returns: dictionary with boolean keys accepted, required and enabled
         """
+        
+        # by default we will accept the item. if any of the checks below fail,
+        # we'll set this to False.
+        accepted = True
 
         
         publisher = self.parent
