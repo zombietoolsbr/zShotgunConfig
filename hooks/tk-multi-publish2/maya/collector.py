@@ -113,7 +113,6 @@ class MayaSessionCollector(HookBaseClass):
         if cmds.ls(geometry=True, noIntermediate=True):
             self._collect_session_geometry(item)
 
-        self._collect_meshes(item)
         self._collect_cameras(item)
         self._collect_meshGroup(item)
 
