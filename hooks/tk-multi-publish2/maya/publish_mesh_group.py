@@ -10,6 +10,7 @@
 
 import os
 import pprint
+import re
 import maya.cmds as cmds
 import maya.mel as mel
 import sgtk
