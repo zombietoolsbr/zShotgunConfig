@@ -387,6 +387,7 @@ class MayaSessionCollector(HookBaseClass):
             # items to act upon. We also give the item a display type and
             # display name (the group name). In the future, other publish
             # plugins might attach to these mesh items to publish other things
+            
             mesh_item = parent_item.create_item(
                 "maya.session.mesh",
                 "Mesh",
@@ -508,8 +509,8 @@ class MayaSessionCollector(HookBaseClass):
             # display name (the group name). In the future, other publish
             # plugins might attach to these mesh items to publish other things
             alembic_item = parent_item.create_item(
-                "maya.session.alembic",
-                "Alembic",
+                "maya.session.mesh",
+                "All master_group animation",
                 object
             )
             

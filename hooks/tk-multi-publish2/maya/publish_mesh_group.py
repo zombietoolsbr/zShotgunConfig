@@ -17,7 +17,7 @@ import sgtk
 HookBaseClass = sgtk.get_hook_baseclass()
 
 
-class MayaMeshGroupPublishPlugin(HookBaseClass):
+class MayaSessionGeometryZombiePublishPlugin(HookBaseClass):
     """
     Plugin for publishing an open maya session.
 
@@ -34,25 +34,26 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
     @property
     def description(self):
         """
-        Verbose, multi-line description of what the plugin does. This can
-        contain simple html for formatting.
+        Verbose, multi-line description of what the plugin does (:class:`str`).
+        The string can contain html for formatting for display in the UI (any
+        html tags supported by Qt's rich text engine).
         """
-
         return """
-        <p>This plugin publishes session geometry for the current session. Any
-        session geometry will be exported to the path defined by this plugin's
-        configured "Publish Template" setting. The plugin will fail to validate
-        if the "AbcExport" plugin is not enabled or cannot be found.</p>
+        <p>
+        This plugin handles exporting and publishing Maya shader networks.
+        Collected mesh shaders are exported to disk as .ma files that can
+        be loaded by artists downstream. This is a simple, example
+        implementation and not meant to be a robust, battle-tested solution for
+        shader or texture management on production.
+        </p>
         """
 
     @property
     def settings(self):
         """
         A :class:`dict` defining the configuration interface for this plugin.
-
         The dictionary can include any number of settings required by the
         plugin, and takes the form::
-
             {
                 <setting_name>: {
                     "type": <type>,
@@ -66,30 +67,25 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
                 },
                 ...
             }
-
         The keys in the dictionary represent the names of the settings. The
         values are a dictionary comprised of 3 additional key/value pairs.
-
         * ``type``: The type of the setting. This should correspond to one of
           the data types that toolkit accepts for app and engine settings such
           as ``hook``, ``template``, ``string``, etc.
         * ``default``: The default value for the settings. This can be ``None``.
         * ``description``: A description of the setting as a string.
-
         The values configured for the plugin will be supplied via settings
         parameter in the :meth:`accept`, :meth:`validate`, :meth:`publish`, and
         :meth:`finalize` methods.
-
         The values also drive the custom UI defined by the plugin whick allows
         artists to manipulate the settings at runtime. See the
         :meth:`create_settings_widget`, :meth:`set_ui_settings`, and
         :meth:`get_ui_settings` for additional information.
-
         .. note:: See the hooks defined in the publisher app's ``hooks/`` folder
            for additional example implementations.
         """
         # inherit the settings from the base publish plugin
-        plugin_settings = super(MayaMeshGroupPublishPlugin, self).settings or {}
+        plugin_settings = super(MayaSessionGeometryZombiePublishPlugin, self).settings or {}
 
         # settings specific to this class
         meshGroup_publish_settings = {
@@ -106,55 +102,77 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
         plugin_settings.update(meshGroup_publish_settings)
 
         return plugin_settings
-    
+
     @property
     def item_filters(self):
         """
-        List of item types that this plugin is interested in.
-
-        Only items matching entries in this list will be presented to the
-        accept() method. Strings can contain glob patters such as *, for example
-        ["maya.*", "file.maya"]
+        A :class:`list` of item type wildcard :class:`str` objects that this
+        plugin is interested in.
+        As items are collected by the collector hook, they are given an item
+        type string (see :meth:`~.processing.Item.create_item`). The strings
+        provided by this property will be compared to each collected item's
+        type.
+        Only items with types matching entries in this list will be considered
+        by the :meth:`accept` method. As such, this method makes it possible to
+        quickly identify which items the plugin may be interested in. Any
+        sophisticated acceptance logic is deferred to the :meth:`accept` method.
+        Strings can contain glob patters such as ``*``, for example ``["maya.*",
+        "file.maya"]``.
         """
-        return ["maya.session.geometry"]
+        # NOTE: this matches the item type defined in the collector.
+        return ["maya.session.mesh"]
 
     def accept(self, settings, item):
         """
-        Method called by the publisher to determine if an item is of any
-        interest to this plugin. Only items matching the filters defined via the
-        item_filters property will be presented to this method.
-
-        A publish task will be generated for each item accepted here. Returns a
-        dictionary with the following booleans:
-
-            - accepted: Indicates if the plugin is interested in this value at
-                all. Required.
-            - enabled: If True, the plugin will be enabled in the UI, otherwise
-                it will be disabled. Optional, True by default.
-            - visible: If True, the plugin will be visible in the UI, otherwise
-                it will be hidden. Optional, True by default.
-            - checked: If True, the plugin will be checked in the UI, otherwise
-                it will be unchecked. Optional, True by default.
-
-        :param settings: Dictionary of Settings. The keys are strings, matching
-            the keys returned in the settings property. The values are `Setting`
-            instances.
-        :param item: Item to process
-
+        This method is called by the publisher to see if the plugin accepts the
+        supplied item for processing.
+        Only items matching the filters defined via the :data:`item_filters`
+        property will be presented to this method.
+        A publish task will be generated for each item accepted here.
+        This method returns a :class:`dict` of the following form::
+            {
+                "accepted": <bool>,
+                "enabled": <bool>,
+                "visible": <bool>,
+                "checked": <bool>,
+            }
+        The keys correspond to the acceptance state of the supplied item. Not
+        all keys are required. The keys are defined as follows:
+        * ``accepted``: Indicates if the plugin is interested in this value at all.
+          If ``False``, no task will be created for this plugin. Required.
+        * ``enabled``: If ``True``, the created task will be enabled in the UI,
+          otherwise it will be disabled (no interaction allowed). Optional,
+          ``True`` by default.
+        * ``visible``: If ``True``, the created task will be visible in the UI,
+          otherwise it will be hidden. Optional, ``True`` by default.
+        * ``checked``: If ``True``, the created task will be checked in the UI,
+          otherwise it will be unchecked. Optional, ``True`` by default.
+        In addition to the item, the configured settings for this plugin are
+        supplied. The information provided by each of these arguments can be
+        used to decide whether to accept the item.
+        For example, the item's ``properties`` :class:`dict` may house meta data
+        about the item, populated during collection. This data can be used to
+        inform the acceptance logic.
+        :param dict settings: The keys are strings, matching the keys returned
+            in the :data:`settings` property. The values are
+            :class:`~.processing.Setting` instances.
+        :param item: The :class:`~.processing.Item` instance to process for
+            acceptance.
         :returns: dictionary with boolean keys accepted, required and enabled
         """
-        
+
         # by default we will accept the item. if any of the checks below fail,
         # we'll set this to False.
         accepted = True
 
-        
+        # a handle on the instance of the publisher app
         publisher = self.parent
+
+        # extract the value of the template configured for this instance
         template_name = settings["Publish Template"].value
 
-        meshGroup_name = item.properties.get("groupName")
-
-        # ensure a work file template is available on the parent item
+        # ensure a work file template is available on the parent maya session
+        # item.
         work_template = item.parent.properties.get("work_template")
         if not work_template:
             self.logger.debug(
@@ -163,11 +181,12 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
             )
             accepted = False
 
-        # ensure the publish template is defined and valid and that we also have
+        # ensure the publish template is defined and valid
         publish_template = publisher.get_template_by_name(template_name)
+        self.logger.debug("TEMPLATE NAME: " + str(template_name))
         if not publish_template:
             self.logger.debug(
-                "The valid publish template could not be determined for the "
+                "A valid publish template could not be determined for the "
                 "session geometry item. Not accepting the item."
             )
             accepted = False
@@ -175,14 +194,6 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
         # we've validated the publish template. add it to the item properties
         # for use in subsequent methods
         item.properties["publish_template"] = publish_template
-
-        # check that the AbcExport command is available!
-        if not mel.eval("exists \"AbcExport\""):
-            self.logger.debug(
-                "Item not accepted because alembic export command 'AbcExport' "
-                "is not available. Perhaps the plugin is not enabled?"
-            )
-            accepted = False
 
         # because a publish template is configured, disable context change. This
         # is a temporary measure until the publisher handles context switching
@@ -193,25 +204,21 @@ class MayaMeshGroupPublishPlugin(HookBaseClass):
             "accepted": accepted,
             "checked": True
         }
-
-def validate(self, settings, item):
+    
+    def validate(self, settings, item):
         """
         Validates the given item, ensuring it is ok to publish.
-
         Returns a boolean to indicate whether the item is ready to publish.
         Returning ``True`` will indicate that the item is ready to publish. If
         ``False`` is returned, the publisher will disallow publishing of the
         item.
-
         An exception can also be raised to indicate validation failed.
         When an exception is raised, the error message will be displayed as a
         tooltip on the task as well as in the logging view of the publisher.
-
         :param dict settings: The keys are strings, matching the keys returned
             in the :data:`settings` property. The values are
             :class:`~.processing.Setting` instances.
         :param item: The :class:`~.processing.Item` instance to validate.
-
         :returns: True if item is valid, False otherwise.
         """
 
@@ -282,10 +289,10 @@ def validate(self, settings, item):
             item.properties["publish_version"] = work_fields["version"]
 
         # run the base class validation
-        return super(MayaMeshGroupPublishPlugin, self).validate(
+        return super(MayaSessionGeometryZombiePublishPlugin, self).validate(
             settings, item)
 
-def publish(self, settings, item):
+    def publish(self, settings, item):
         """
         Executes the publish logic for the given item and settings.
 
@@ -300,13 +307,12 @@ def publish(self, settings, item):
         # get the path to create and publish
         publish_path = item.properties["path"]
 
+        #get all group with _master_GRP
+        mesh_group = item.properties["groupName"]
         # ensure the publish folder exists:
         publish_folder = os.path.dirname(publish_path)
         self.parent.ensure_folder_exists(publish_folder)
 
-        mesh_group = item.properties["groupName"]
-
-        
         # set the alembic args that make the most sense when working with Mari.
         # These flags will ensure the export of an Alembic file that contains
         # all visible geometry from the current scene together with UV's and
@@ -338,20 +344,18 @@ def publish(self, settings, item):
         # build the export command.  Note, use AbcExport -help in Maya for
         # more detailed Alembic export help
         abc_export_cmd = ("AbcExport -j \"%s\"" % " ".join(alembic_args))
-
-        cmds.select(mesh_group)
-
-
+        selectGroup = cmds.select(mesh_group)
+        
         # ...and execute it:
         try:
-            self.parent.log_debug("Executing command: %s" % abc_export_cmd)
+            self.parent.log_debug("Executing command: %s %s" % (selectGroup, abc_export_cmd))
             mel.eval(abc_export_cmd)
         except Exception, e:
-            self.logger.error("Failed to export Mesh Group Animation: %s" % e)
+            self.logger.error("Failed to export Geometry: %s" % e)
             return
 
         # Now that the path has been generated, hand it off to the
-        super(MayaMeshGroupPublishPlugin, self).publish(settings, item)
+        super(MayaSessionGeometryZombiePublishPlugin, self).publish(settings, item)
 
 
 def _find_scene_animation_range():
