@@ -308,8 +308,7 @@ class MayaSessionGeometryZombiePublishPlugin(HookBaseClass):
         # get the path to create and publish
         publish_path = item.properties["path"]
 
-        #get all group with _master_GRP
-        mesh_group = item.properties["groupName"]
+
         # ensure the publish folder exists:
         publish_folder = os.path.dirname(publish_path)
         self.parent.ensure_folder_exists(publish_folder)
@@ -330,13 +329,18 @@ class MayaSessionGeometryZombiePublishPlugin(HookBaseClass):
             # set worldSpace
             "-worldSpace",
             #
-            "-writeVisibility"
+            "-writeVisibility",
+    
         ]
 
         # find the animated frame range to use:
         start_frame, end_frame = _find_scene_animation_range()
         if start_frame and end_frame:
             alembic_args.append("-fr %d %d" % (start_frame, end_frame))
+
+        # set root
+        mesh_group = item.properties["groupName"]
+        alembic_args.append("-root %s" % mesh_group)
 
         # Set the output path: 
         # Note: The AbcExport command expects forward slashes!
@@ -345,11 +349,11 @@ class MayaSessionGeometryZombiePublishPlugin(HookBaseClass):
         # build the export command.  Note, use AbcExport -help in Maya for
         # more detailed Alembic export help
         abc_export_cmd = ("AbcExport -j \"%s\"" % " ".join(alembic_args))
-        selectGroup = cmds.select(mesh_group)
+        
         
         # ...and execute it:
         try:
-            self.parent.log_debug("Executing command: %s %s" % (selectGroup, abc_export_cmd))
+            self.parent.log_debug("Executing command: %s" % abc_export_cmd)
             mel.eval(abc_export_cmd)
         except Exception, e:
             self.logger.error("Failed to export Geometry: %s" % e)
