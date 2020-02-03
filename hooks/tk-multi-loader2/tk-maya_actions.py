@@ -197,7 +197,7 @@ class MayaActions(HookBaseClass):
                 
         pm.system.createReference(path,  
                                   mergeNamespacesOnClash=True, 
-                                  namespace="namespace")
+                                  namespace=namespace)
 
         reference_node = cmds.referenceQuery(path, referenceNode=True)
         _hookup_shaders(reference_node)
