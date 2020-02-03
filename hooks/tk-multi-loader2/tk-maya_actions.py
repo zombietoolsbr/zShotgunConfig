@@ -106,6 +106,12 @@ class MayaActions(HookBaseClass):
                 "description": "Creates an image plane for the selected item.."
             })
 
+        if "import_cache_alembic" in actions:
+            action_instances.append( {"name": "Import Cache", 
+                                      "params": None,
+                                      "caption": "Import Cache Alembic", 
+                                      "description": "This will import cache animation to selected node."} )
+        
         return action_instances
 
     def execute_multiple_actions(self, actions):
@@ -166,6 +172,9 @@ class MayaActions(HookBaseClass):
 
         if name == "image_plane":
             self._create_image_plane(path, sg_publish_data)
+        
+        if name == "import_cache_alembic":
+            self._import_cahe_animation(path, sg_publish_data)
 
     ##############################################################################################################
     # helper methods which can be subclassed in custom hooks to fine tune the behaviour of things
@@ -305,6 +314,31 @@ class MayaActions(HookBaseClass):
                 self._maya_major_version = int(major_version_number_str)
         return self._maya_major_version
 
+    def _import_cahe_animation(self, path):
+        
+        """
+        merge animation cache into lookDev model.
+        
+        :param path: Path to file.
+        :param sg_publish_data: Shotgun data dictionary with all the standard publish fields.
+        """
+        if not os.path.exists(path):
+            raise Exception("File not found on disk - '%s'" % path)      
+        
+        #puxe o nome do grupo selecionado
+        groupMesh = cmds.ls( sl = True )
+        groupMesh = [str(item) for item in groupMesh][0] 
+
+        # diretorio do cache de animação
+        cacheAlembic = path
+        cacheAlembic = cacheAlembic.replace("\\", "/")
+
+        abc_export_cmd = ("AbcImport -mode import -connect \"%s\"" % "".join(groupMesh))
+
+        abc_export_cmd = abc_export_cmd + " \"%s\"" % "".join(cacheAlembic)
+
+        mel.eval(abc_export_cmd)
+
 
 def _hookup_shaders(reference_node):
     """
@@ -335,3 +369,4 @@ def _hookup_shaders(reference_node):
                 # assign the shader to the object
                 cmds.select(node, replace=True)
                 cmds.hyperShade(assign=shader)
+
