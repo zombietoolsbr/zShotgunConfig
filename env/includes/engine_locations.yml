@@ -114,12 +114,6 @@ engines.tk-vred.location:
   name: tk-vred
   version: v2.0.2
 
-# Substance Painter
-engines.tk-substancepainter.location:
-  type: git
-  path: https://github.com/zombietoolsbr/tk-substancepainter.git
-  version: v1.2.1
-
 # Premiere
 engines.tk-premiere.location:
   type: git
