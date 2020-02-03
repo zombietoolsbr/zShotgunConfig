@@ -329,7 +329,7 @@ class MayaActions(HookBaseClass):
         groupMesh = cmds.ls( sl = True )
         groupMesh = [str(item) for item in groupMesh][0] 
 
-        # diretorio do cache de animação
+        # diretorio do cache de animacao
         cacheAlembic = path
         cacheAlembic = cacheAlembic.replace("\\", "/")
 
