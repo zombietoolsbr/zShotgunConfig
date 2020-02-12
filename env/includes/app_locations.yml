@@ -113,9 +113,9 @@ apps.tk-multi-devutils.location:
 
 # shotgun folders
 apps.tk-shotgun-folders.location:
-  type: app_store
-  name: tk-shotgun-folders
-  version: v0.1.7
+  type: git
+  path: https://github.com/raphaelmatto/tk-shotgun-folders.git
+  version: v0.0.1
 
 # shotgun launchfolder
 apps.tk-shotgun-launchfolder.location:
