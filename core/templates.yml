@@ -197,7 +197,7 @@ paths:
     users_shot_root: 02_prod/users/{Sequence}/{Shot}/{Step}
     users_asset_root: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_asset_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
-    alembic_shot_root: 02_prod/cache/alembic/{Sequence}/{Shot}
+    alembic_shot_root: 02_prod/cache/alembic/animation/{Sequence}/{Shot}
     asset_work_post: 03_post/02_Work/{sg_asset_type}/{Asset}/{Step}
     asset_publish_post: 03_post/03_Publish/{sg_asset_type}/{Asset}/{Step}   
     sequence_work_post: 03_post/02_Work/{Sequence}/{Shot}
