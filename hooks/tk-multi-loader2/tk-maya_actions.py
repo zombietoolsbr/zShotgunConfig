@@ -192,12 +192,12 @@ class MayaActions(HookBaseClass):
         
         # make a name space out of entity name + publish name
         # e.g. bunny_upperbody                
-        namespace = "%s %s" % (sg_publish_data.get("entity").get("name"), sg_publish_data.get("name"))
+        namespace = "%s" % (sg_publish_data.get("name"))
         namespace = namespace.replace(" ", "_")
                 
         pm.system.createReference(path,  
                                   mergeNamespacesOnClash=True, 
-                                  namespace=":")
+                                  namespace=namespace)
 
         reference_node = cmds.referenceQuery(path, referenceNode=True)
         _hookup_shaders(reference_node)
