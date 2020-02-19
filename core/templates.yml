@@ -198,8 +198,9 @@ paths:
     users_asset_root: 02_prod/users/{sg_asset_type}/{Asset}/{Step}
     alembic_asset_root: 02_prod/cache/alembic/{sg_asset_type}/{Asset}/{Step}
     alembic_shot_root: 02_prod/cache/alembic/animation/{Sequence}/{Shot}
-    asset_work_post: 03_post/02_Work/{sg_asset_type}/{Asset}/{Step}
-    asset_publish_post: 03_post/03_Publish/{sg_asset_type}/{Asset}/{Step}   
+
+    #asset_work_post: 03_post/02_Work/{sg_asset_type}/{Asset}/{Step}
+    #asset_publish_post: 03_post/03_Publish/{sg_asset_type}/{Asset}/{Step}   
     sequence_work_post: 03_post/02_Work/{Sequence}/{Shot}
     sequence_publish_post: 03_post/03_Publish/{Sequence}/{Shot}/ 
     sequence_editorial_work_post: 03_post/02_Work/{Sequence}/{Shot}/editorial
@@ -456,12 +457,12 @@ paths:
     #
 
     shot_publish_area_premiere:
-        definition: '@asset_publish_post/premiere'
+        definition: '@sequence_publish_post/premiere'
     premiere_shot_publish:
         definition: '@shot_publish_area_premiere/{name}.v{version}.prproj'
 
     shot_work_area_premiere:
-        definition: '@asset_work_post/premiere'
+        definition: '@sequence_work_post/premiere'
     premiere_shot_work:
         definition: '@shot_work_area_premiere/{name}.v{version}.prproj'
     premiere_shot_snapshot:
@@ -659,30 +660,30 @@ paths:
     #
 
     # define the location of a work area
-    asset_work_area_nuke:
-        definition: '@asset_work_post/nuke'
+#    asset_work_area_nuke:
+#        definition: '@asset_work_post/nuke'
     # define the location of a publish area
-    asset_publish_area_nuke:
-        definition: '@asset_publish_post/nuke'
-    # outputs from the Shotgun Write Node for assets
-    nuke_asset_render:
-        definition: '@asset_work_area_nuke/images/{name}/v{version}/{width}x{height}/{Asset}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
-    nuke_asset_render_pub:
-        definition: '@asset_publish_area_nuke/elements/{name}/v{version}/{width}x{height}/{Asset}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
-    # review output
-    nuke_asset_render_movie:
-        definition: '@asset_work_area_nuke/review/{Asset}_{name}_{nuke.output}_v{version}.mov'
+#    asset_publish_area_nuke:
+#        definition: '@asset_publish_post/nuke'
+#    # outputs from the Shotgun Write Node for assets
+#    nuke_asset_render:
+#        definition: '@asset_work_area_nuke/images/{name}/v{version}/{width}x{height}/{Asset}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+#    nuke_asset_render_pub:
+#        definition: '@asset_publish_area_nuke/elements/{name}/v{version}/{width}x{height}/{Asset}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+#    # review output
+#    nuke_asset_render_movie:
+#        definition: '@asset_work_area_nuke/review/{Asset}_{name}_{nuke.output}_v{version}.mov'
 #    asset_quicktime_quick:
-        definition: 'asset_work_area_nuke/review/quickdaily/{Asset}_{name}_{iteration}.mov'
-    # The location of WIP script files
-    nuke_asset_work:
-        definition: '@asset_work_area_nuke/script_nuke/{name}.v{version}.nk'
-    # The location of backups of WIP files
-    nuke_asset_snapshot:
-        definition: '@asset_work_area_nuke/script_nuke/snapshots/{name}.v{version}.{timestamp}.nk'
-    # The location of published nuke script files
-    nuke_asset_publish:
-        definition: '@asset_publish_area_nuke/script_nuke/{name}.v{version}.nk'
+#        definition: 'asset_work_area_nuke/review/quickdaily/{Asset}_{name}_{iteration}.mov'
+#    # The location of WIP script files
+#    nuke_asset_work:
+#        definition: '@asset_work_area_nuke/script_nuke/{name}.v{version}.nk'
+#    # The location of backups of WIP files
+#    nuke_asset_snapshot:
+#        definition: '@asset_work_area_nuke/script_nuke/snapshots/{name}.v{version}.{timestamp}.nk'
+#    # The location of published nuke script files
+#    nuke_asset_publish:
+#        definition: '@asset_publish_area_nuke/script_nuke/{name}.v{version}.nk'
 
     #
     # Alias
