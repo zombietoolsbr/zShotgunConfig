@@ -200,10 +200,10 @@ paths:
     alembic_shot_root: 02_prod/cache/alembic/animation/{Sequence}/{Shot}
     #asset_work_post: 03_post/02_Work/{sg_asset_type}/{Asset}/{Step}
     #asset_publish_post: 03_post/03_Publish/{sg_asset_type}/{Asset}/{Step}   
-    sequence_work_post: 03_post/01_Edit/{Sequence}/{Shot}
-    sequence_publish_post: 03_post/02_Post/{Sequence}/{Shot}/ 
-    sequence_editorial_work_post: 03_post/01_Edit/{Sequence}/{Shot}/editorial
-    sequence_editorial_publish_post: 03_post/02_Post/{Sequence}/{Shot}/editorial
+    sequence_work_post: 03_post/02_Work/{Sequence}/{Shot}
+    sequence_publish_post: 03_post/03_Publish/{Sequence}/{Shot}/ 
+    sequence_editorial_work_post: 03_post/02_Work/{Sequence}/{Shot}/editorial
+    sequence_editorial_publish_post: 03_post/03_Publish/{Sequence}/{Shot}/editorial
 
     
     ##########################################################################################
