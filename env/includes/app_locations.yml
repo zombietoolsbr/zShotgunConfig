@@ -161,9 +161,9 @@ apps.tk-houdini-mantranode.location:
 
 # quickreview
 apps.tk-nuke-quickreview.location:
-  type: git_branch,
-  branch: master,
-  path: https://github.com/zombietoolsbr/tk-nuke-quickreview.git,
+  type: git_branch
+  branch: master
+  path: https://github.com/zombietoolsbr/tk-nuke-quickreview.git
   version: 1f0aab3
 
 # writenode
