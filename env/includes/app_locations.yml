@@ -164,7 +164,7 @@ apps.tk-nuke-quickreview.location:
   type: git_branch
   branch: master
   path: https://github.com/zombietoolsbr/tk-nuke-quickreview.git
-  version: c84e1e2
+  version: 587e4d6
 
 # writenode
 apps.tk-nuke-writenode.location:
