@@ -51,8 +51,8 @@ projectZombie_2020:
 
     # these paths will be populated by the associated local storage in Shotgun
     # at setup time.
-    mac_path:
-    linux_path:
+    mac_path: smb://192.168.0.11/ZombieServer/PROJETOS/2020
+    linux_path: 
     windows_path: X:\PROJETOS\2020
 
     # indicates that this is the default storage root
