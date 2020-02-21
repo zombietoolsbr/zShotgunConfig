@@ -199,18 +199,18 @@ paths:
     #
 
     shot_work_area_photoshop:
-        definition: '@shot_root/01_Work/photshop'
+        definition: '@shot_root/01_Work/photoshop'
     # The location of WIP files
     photoshop_shot_work:
-        definition: '@shot_work_area_photoshop/{name}.v{version}.psd'
+        definition: '@shot_root/01_Work/photoshop/{name}.v{version}.psd'
     # The location of backups of WIP files
     photoshop_shot_snapshot:
-        definition: '@shot_work_area_photoshop/snapshots/{name}.v{version}.{timestamp}.psd'
+        definition: '@shot_root/01_Work/photoshop/snapshots/{name}.v{version}.{timestamp}.psd'
     # The location of published files
     shot_publish_area_photoshop:
         definition: '@shot_root/02_Publish/photoshop'
     photoshop_shot_publish:
-        definition: '@shot_publish_area_photoshop/{name}.v{version}.psd'
+        definition: '@shot_root/02_Publish/photoshop/{name}.v{version}.psd'
 
 
 
@@ -226,12 +226,12 @@ paths:
         definition: '@asset_root/01_Work/photoshop'
     # The location of WIP files
     photoshop_asset_work:
-        definition: '@asset_work_area_photoshop/{name}.v{version}.psd'
+        definition: '@asset_root/01_Work/photoshop/{name}.v{version}.psd'
     # The location of backups of WIP files
     photoshop_asset_snapshot:
-        definition: '@asset_work_area_photoshop/snapshots/{name}.v{version}.{timestamp}.psd'
+        definition: '@asset_root/01_Work/photoshop/snapshots/{name}.v{version}.{timestamp}.psd'
     # The location of published files
     asset_publish_area_photoshop:
         definition: '@asset_root/02_Publish/photoshop'
     photoshop_asset_publish:
-        definition: '@asset_publish_area_photoshop/{name}.v{version}.psd'
+        definition: '@asset_root/02_Publish/photoshop/{name}.v{version}.psd'
