@@ -191,17 +191,15 @@ paths:
     #
     # These don't require the standard formatting (with definition and root_name) because they
     # will be set within each template that uses the alias.
-    shot_root_work: 01_pre/sequences/{Sequence}/{Shot}/Photoshop/01_Work/{Step}
-    asset_root_work: 01_pre/assets/{sg_asset_type}/{Asset}/Photoshop/01_Work/{Step}
-    shot_root_pub: 01_pre/sequences/{Sequence}/{Shot}/Photoshop/02_Publish/{Step}
-    asset_root_pub: 01_pre/assets/{sg_asset_type}/{Asset}/Photoshop/02_Publish/{Step}
+    shot_root: 01_pre/sequences/{Sequence}/{Shot}/{Step}
+    asset_root: 01_pre/assets/{sg_asset_type}/{Asset}/{Step}
 
     #
     # Photoshop
     #
 
     shot_work_area_photoshop:
-        definition: '@shot_root_work'
+        definition: '@shot_root/01_Work/photshop'
     # The location of WIP files
     photoshop_shot_work:
         definition: '@shot_work_area_photoshop/{name}.v{version}.psd'
@@ -210,7 +208,7 @@ paths:
         definition: '@shot_work_area_photoshop/snapshots/{name}.v{version}.{timestamp}.psd'
     # The location of published files
     shot_publish_area_photoshop:
-        definition: '@shot_root'
+        definition: '@shot_root/02_Publish/photoshop'
     photoshop_shot_publish:
         definition: '@shot_publish_area_photoshop/{name}.v{version}.psd'
 
@@ -225,7 +223,7 @@ paths:
     # Photoshop
     #
     asset_work_area_photoshop:
-        definition: '@asset_root_work'
+        definition: '@asset_root/01_Work/photoshop'
     # The location of WIP files
     photoshop_asset_work:
         definition: '@asset_work_area_photoshop/{name}.v{version}.psd'
@@ -234,6 +232,6 @@ paths:
         definition: '@asset_work_area_photoshop/snapshots/{name}.v{version}.{timestamp}.psd'
     # The location of published files
     asset_publish_area_photoshop:
-        definition: '@asset_root_pub'
+        definition: '@asset_root/02_Publish/photoshop'
     photoshop_asset_publish:
         definition: '@asset_publish_area_photoshop/{name}.v{version}.psd'
