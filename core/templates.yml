@@ -436,7 +436,7 @@ paths:
     nuke_shot_render_mov:
         definition: '@shot_work_area_nuke/movies/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.mov'
     nuke_shot_render_pub_mov:
-        definition: '@render_nuke_publish/{name}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.mov'
+        definition: '@render_nuke_publish/{width}x{height}/{Shot}_{nuke.output}_v{version}.mov'
     nuke_shot_render_precomp_exr:
         definition: '@shot_work_area_nuke/precomp/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
     nuke_shot_render_pub_precomp_exr:
@@ -444,7 +444,7 @@ paths:
     nuke_shot_render_mono_exr:
         definition: '@shot_work_area_nuke/exr/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
     nuke_shot_render_pub_mono_exr:
-        definition: '@shot_publish_area_nuke/exr/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+        definition: '@shot_publish_area_nuke/exr/v{version}/{width}x{height}/{Shot}_{nuke.output}_v{version}.{SEQ}.exr'
 
     # review output
     shot_quicktime_quick:
