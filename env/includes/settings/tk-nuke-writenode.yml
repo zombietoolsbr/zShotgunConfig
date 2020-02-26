@@ -35,40 +35,8 @@ settings.tk-nuke-writenode.asset:
 settings.tk-nuke-writenode.shot:
   template_script_work: nuke_shot_work
   write_nodes:
-  - file_type: exr
-    name: Stereo Exr, 32 bit
-    proxy_publish_template:
-    proxy_render_template:
-    publish_template: nuke_shot_render_pub_stereo
-    render_template: nuke_shot_render_stereo
-    settings:
-      datatype: 32 bit float
-    tank_type: Rendered Image
-    tile_color: []
-    promote_write_knobs: []
-  - file_type: exr
-    name: Stereo Exr, 16 bit
-    promote_write_knobs: []
-    proxy_publish_template:
-    proxy_render_template:
-    publish_template: nuke_shot_render_pub_stereo
-    render_template: nuke_shot_render_stereo
-    settings:
-      datatype: 16 bit half
-    tank_type: Rendered Image
-    tile_color: []
-  - file_type: dpx
-    name: Mono Dpx
-    promote_write_knobs: []
-    proxy_publish_template:
-    proxy_render_template:
-    publish_template: nuke_shot_render_pub_mono_dpx
-    render_template: nuke_shot_render_mono_dpx
-    settings: {}
-    tank_type: Rendered Image
-    tile_color: []
   - file_type: mov
-    name: Mov
+    name: Mov 4444
     promote_write_knobs: []
     proxy_publish_template:
     proxy_render_template:
@@ -79,4 +47,28 @@ settings.tk-nuke-writenode.shot:
       fps: 24
     tank_type: Rendered Image
     tile_color: []
+  - file_type: exr
+    name: Exr, precomp 32 bit
+    promote_write_knobs: []
+    proxy_publish_template:
+    proxy_render_template:
+    publish_template: nuke_shot_render_pub_precomp_exr
+    render_template: nuke_shot_render_precomp_exr
+    settings:
+      datatype: 32 bit float
+    tank_type: Rendered Image
+    tile_color: []
+  - file_type: exr
+    name: Exr, Mono 16 bit
+    promote_write_knobs: []
+    proxy_publish_template:
+    proxy_render_template:
+    publish_template: nuke_shot_render_pub_mono_exr
+    render_template: nuke_shot_render_mono_exr
+    settings:
+      datatype: 16 bit float
+      compression: DWAA
+    tank_type: Rendered Image
+    tile_color: []
+
   location: "@apps.tk-nuke-writenode.location"

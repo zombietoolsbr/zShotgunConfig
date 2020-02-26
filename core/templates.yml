@@ -437,6 +437,15 @@ paths:
         definition: '@shot_work_area_nuke/movies/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.mov'
     nuke_shot_render_pub_mov:
         definition: '@render_nuke_publish/{name}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.mov'
+    nuke_shot_render_precomp_exr:
+        definition: '@shot_work_area_nuke/precomp/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+    nuke_shot_render_pub_precomp_exr:
+        definition: '@shot_publish_area_nuke/precomp/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+    nuke_shot_render_mono_exr:
+        definition: '@shot_work_area_nuke/exr/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+    nuke_shot_render_pub_mono_exr:
+        definition: '@shot_publish_area_nuke/exr/{name}/v{version}/{width}x{height}/{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+
     # review output
     shot_quicktime_quick:
         definition: '@shot_work_area_nuke/review/quickdaily/{Shot}_{name}_{iteration}.mov'
