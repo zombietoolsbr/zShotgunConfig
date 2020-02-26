@@ -82,5 +82,5 @@ frameworks:
   tk-framework-adobe-ppro_v1.x.x:
     location:
       type: git
-      path: https://github.com/danieleaton/tk-framework-adobe.git
-      version: v1.0.4
+      path: https://github.com/Vintata/tk-framework-adobe-ppro.git
+      version: 1.0.5
