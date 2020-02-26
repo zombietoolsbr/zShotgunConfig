@@ -47,7 +47,7 @@ apps.tk-multi-launchapp.location:
 apps.tk-multi-loader2.location:
   type: app_store
   name: tk-multi-loader2
-  version: v1.19.6
+  version: v1.200
 
 # publish2
 apps.tk-multi-publish2.location:
@@ -59,19 +59,19 @@ apps.tk-multi-publish2.location:
 apps.tk-multi-pythonconsole.location:
   type: app_store
   name: tk-multi-pythonconsole
-  version: v1.1.2
+  version: v1.2.1
 
 # reviewsubmission
 apps.tk-multi-reviewsubmission.location:
   type: app_store
   name: tk-multi-reviewsubmission
-  version: v0.3.2
+  version: v1.0.2
 
 # screeningroom
 apps.tk-multi-screeningroom.location:
   type: app_store
   name: tk-multi-screeningroom
-  version: v0.3.4
+  version: v0.4.0
 
 # setframerange
 apps.tk-multi-setframerange.location:
@@ -83,13 +83,13 @@ apps.tk-multi-setframerange.location:
 apps.tk-multi-shotgunpanel.location:
   type: app_store
   name: tk-multi-shotgunpanel
-  version: v1.6.4
+  version: v1.7.0
 
 # snapshot
 apps.tk-multi-snapshot.location:
   type: app_store
   name: tk-multi-snapshot
-  version: v0.7.5
+  version: v0.8.0
 
 # workfiles (required for Mari)
 apps.tk-multi-workfiles.location:
@@ -101,7 +101,7 @@ apps.tk-multi-workfiles.location:
 apps.tk-multi-workfiles2.location:
   type: app_store
   name: tk-multi-workfiles2
-  version: v0.11.15
+  version: v0.12.0
 
 # dev utils
 apps.tk-multi-devutils.location:
@@ -161,9 +161,10 @@ apps.tk-houdini-mantranode.location:
 
 # quickreview
 apps.tk-nuke-quickreview.location:
-  type: app_store
-  name: tk-nuke-quickreview
-  version: v1.0.3
+  type: git_branch
+  branch: master
+  path: https://github.com/zombietoolsbr/tk-nuke-quickreview.git
+  version: 587e4d6
 
 # writenode
 apps.tk-nuke-writenode.location:
