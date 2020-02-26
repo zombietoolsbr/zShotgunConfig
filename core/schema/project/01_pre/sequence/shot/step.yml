@@ -13,3 +13,6 @@ type: "shotgun_step"
 
 # the shotgun field to use for the folder name
 name: "short_name"
+
+# recurse down from parent folder
+create_with_parent: false
