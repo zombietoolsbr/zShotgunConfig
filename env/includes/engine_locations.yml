@@ -117,5 +117,5 @@ engines.tk-vred.location:
 # Premiere
 engines.tk-premiere.location:
   type: git
-  path: https://github.com/zombietoolsbr/tk-premiere.git
-  version: 0.0.3
+  path: https://github.com/Vintata/tk-premiere.git
+  version: v1.0.8
