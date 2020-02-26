@@ -191,8 +191,8 @@ paths:
     #
     # These don't require the standard formatting (with definition and root_name) because they
     # will be set within each template that uses the alias.
-    shot_root: 01_pre/sequences/{Sequence}/{Shot}/{Step}
-    asset_root: 01_pre/assets/{sg_asset_type}/{Asset}/{Step}
+    shot_root: 01_pre/{Sequence}/{Shot}/{Step}
+    asset_root: 01_pre/{sg_asset_type}/{Asset}/{Step}
 
     #
     # Photoshop
