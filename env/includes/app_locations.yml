@@ -171,7 +171,7 @@ apps.tk-nuke-writenode.location:
   type: git_branch
   branch: master
   path: https://github.com/zombietoolsbr/tk-nuke-writenode.git
-  version: 2a43424
+  version: 1e23e10
 
 # ---- Flame apps
 
