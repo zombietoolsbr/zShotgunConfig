@@ -14,6 +14,11 @@
 
 ################################################################################
 
+#Photoshop CC 2020
+path.linux.photoshopcc:
+path.mac.photoshopcc: "/Applications/Adobe Photoshop CC 2020/Adobe Photoshop CC 2020.app"
+path.windows.photoshopcc: C:\Program Files\Adobe\Adobe Photoshop 2020\Photoshop.exe
+
 # Mari
 path.linux.mari: "Mari4.2"
 path.mac.mari: "/Applications/Mari3.4v2/Mari3.4v2.app"
