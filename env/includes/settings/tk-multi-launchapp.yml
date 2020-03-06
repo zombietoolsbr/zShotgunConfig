@@ -33,6 +33,17 @@ settings.tk-multi-launchapp.shotgun:
 
 # app-specific launchapp configurations
 
+# photoshopcc
+settings.tk-multi-launchapp.hiero:
+  engine: tk-photoshopcc
+  icon: "{target_engine}/photoshop.png"
+  linux_path: "@path.linux.photoshopcc"
+  mac_path: "@path.mac.photoshopcc"
+  windows_path: "@path.windows.photoshopcc"
+  menu_name: PhotoshopCC20
+  location: "@apps.tk-multi-launchapp.location"
+
+
 # hiero
 settings.tk-multi-launchapp.hiero:
   engine: tk-hiero
