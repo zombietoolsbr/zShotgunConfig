@@ -44,7 +44,7 @@
 
 
 
-projectZombie_2020:
+zombieRemoto:
 
     description: A top-level root folder for production data. Project folders
         will be created beneath this location.
@@ -53,7 +53,7 @@ projectZombie_2020:
     # at setup time.
     mac_path:
     linux_path:
-    windows_path: X:\PROJETOS\2020
+    windows_path: R:\Zombie Studio (freelance)\PROJETOS\2020
 
     # indicates that this is the default storage root
     default: true
